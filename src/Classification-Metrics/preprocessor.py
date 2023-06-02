@@ -142,8 +142,9 @@ def display_text_sentence_stats(sentences):
 
 def separate_words_with_hyphen(text):
     """*********************************** needs some work is not working properly yet"""
-    pattern = r'\b(?<!\w+-)(\w+)([-—])(?!\w+-)(\w+)\b'
-    separated_text = regex.sub(pattern, r'\1 \2 \3', text)
+    # pattern = r'\b(?<!\w+-)(\w+)([-—])(?!\w+-)(\w+)\b'
+    # separated_text = regex.sub(pattern, r'\1 \2 \3', text)
+    separated_text = text.replace("-", " ")
     return separated_text
 
 
@@ -171,3 +172,4 @@ def remove_new_line_characters(input_text):
 #
 # sentences = split_text_into_sentences(text_harry_potter)
 # display_text_sentence_stats(sentences)
+print(separate_words_with_hyphen("Words-joined together-by hyphens-are-everywhere re-enter"))
