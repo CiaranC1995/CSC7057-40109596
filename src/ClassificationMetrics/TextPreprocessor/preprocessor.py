@@ -29,3 +29,11 @@ class TextPreprocessor:
         """Removes new line characters from a piece of text."""
         processed_text = input_text.replace('\n', '')
         return processed_text
+
+    @staticmethod
+    def remove_punctuation(input_text):
+        """Removes all punctuation from a piece of text"""
+        pattern = r'[^\w\s]'
+        processed_text = re.sub(pattern, '', input_text)
+        return processed_text
+
