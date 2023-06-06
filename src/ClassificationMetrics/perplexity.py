@@ -37,7 +37,7 @@ tokenized_text = preprocessor.split_into_sentences(text_to_analyse)
 # Remove new line characters from tokenized list of sentences
 processed_tokenized_text = []
 for sentence in tokenized_text:
-    processed_sentence = preprocessor.remove_new_line_characters(sentence)
+    processed_sentence = preprocessor.remove_new_line_chars(sentence)
     processed_tokenized_text.append(processed_sentence)
 
 # Calculate the individual PPL of each sentence

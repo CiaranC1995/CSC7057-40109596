@@ -25,7 +25,7 @@ class TextPreprocessor:
         return len(input_text)
 
     @staticmethod
-    def remove_new_line_characters(input_text):
+    def remove_new_line_chars(input_text):
         """Removes new line characters from a piece of text."""
         processed_text = input_text.replace('\n', '')
         return processed_text
