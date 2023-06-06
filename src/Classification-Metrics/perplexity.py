@@ -1,7 +1,10 @@
 import math
 import torch
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
-from preprocessor import *
+from TextPreprocessor.preprocessor import *
+
+# Creating Instance of TextPreprocessor
+preprocessor = TextPreprocessor()
 
 # Reading in text to analyse from file
 with open(r'C:\Users\ccase\Desktop\Dissertation\Examples of Text\Human\Human_HarryPotter.txt') as f:
@@ -29,12 +32,12 @@ def calculate_burstiness(perplexities):
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 model = GPT2LMHeadModel.from_pretrained('gpt2')
 
-tokenized_text = split_text_into_sentences(text_to_analyse)
+tokenized_text = preprocessor.split_text_into_sentences(text_to_analyse)
 
 # Remove new line characters from tokenized list of sentences
 processed_tokenized_text = []
 for sentence in tokenized_text:
-    processed_sentence = remove_new_line_characters(sentence)
+    processed_sentence = preprocessor.remove_new_line_characters(sentence)
     processed_tokenized_text.append(processed_sentence)
 
 # Calculate the individual PPL of each sentence

@@ -20,7 +20,7 @@ class TextPreprocessor:
         return processed_sentences
 
     @staticmethod
-    def calculate_num_of_characters(input_text):
+    def num_of_chars(input_text):
         """Calculates the number of characters in an input text"""
         return len(input_text)
 
