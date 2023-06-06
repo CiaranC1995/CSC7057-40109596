@@ -12,7 +12,7 @@ class TextPreprocessor:
         pass
 
     @staticmethod
-    def split_text_into_sentences(input_text):
+    def split_into_sentences(input_text):
         """Separates a piece of text into sentences."""
         sentences = sent_tokenize(input_text, language='English')
         # Ensures that each tokenized sentence contains at least one valid word

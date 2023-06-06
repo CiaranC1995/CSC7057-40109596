@@ -32,7 +32,7 @@ def calculate_burstiness(perplexities):
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 model = GPT2LMHeadModel.from_pretrained('gpt2')
 
-tokenized_text = preprocessor.split_text_into_sentences(text_to_analyse)
+tokenized_text = preprocessor.split_into_sentences(text_to_analyse)
 
 # Remove new line characters from tokenized list of sentences
 processed_tokenized_text = []
