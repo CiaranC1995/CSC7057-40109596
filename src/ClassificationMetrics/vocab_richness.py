@@ -7,6 +7,7 @@ from TextPreprocessor import preprocessor as pp
 with open(r'C:\Users\ccase\Desktop\Dissertation\Examples of Text\Human\Human_HarryPotter.txt') as f:
     human_text_to_analyse = f.read()
 
+# Reading in AI written text to analyse from external file
 with open(r'C:\Users\ccase\Desktop\Dissertation\Examples of Text\AI\AI_AgileSoftwareDevelopment.txt') as f:
     ai_text_to_analyse = f.read()
 
