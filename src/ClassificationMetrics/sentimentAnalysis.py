@@ -1,5 +1,5 @@
 from nltk.sentiment import SentimentIntensityAnalyzer
-from TextPreprocessor import preprocessor as pp
+from src.ClassificationMetrics.TextPreprocessor import preprocessor as pp
 
 # Reading in text to analyse from file
 with open(r'C:\Users\ccase\Desktop\Dissertation\Examples of Text\AI\AI_SpaceStory.txt') as f:
@@ -31,5 +31,5 @@ class SentimentAnalysis:
         return avg_sentiment_score
 
 
-print(f'Sentiment Score : {SentimentAnalysis.perform_sentiment_analysis(text_to_analyse)}')
-print(f'Average Sentiment Score : {SentimentAnalysis.perform_average_sentiment_analysis(text_to_analyse)}')
+# print(f'Sentiment Score : {SentimentAnalysis.perform_sentiment_analysis(text_to_analyse)}')
+# print(f'Average Sentiment Score : {SentimentAnalysis.perform_average_sentiment_analysis(text_to_analyse)}')

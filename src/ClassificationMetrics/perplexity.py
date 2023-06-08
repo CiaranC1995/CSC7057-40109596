@@ -1,7 +1,7 @@
 import math
 import torch
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
-from TextPreprocessor import preprocessor as pp
+from src.ClassificationMetrics.TextPreprocessor import preprocessor as pp
 
 tokenizer_gpt = GPT2Tokenizer.from_pretrained('gpt2')
 model_gpt = GPT2LMHeadModel.from_pretrained('gpt2')

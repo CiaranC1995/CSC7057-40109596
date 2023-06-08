@@ -1,6 +1,6 @@
 import nltk
 from nltk.corpus import stopwords
-from TextPreprocessor import preprocessor as pp
+from src.ClassificationMetrics.TextPreprocessor import preprocessor as pp
 
 # Reading in human written text to analyse from external file
 with open(r'C:\Users\ccase\Desktop\Dissertation\Examples of Text\Human\Human_HarryPotter.txt') as f:
@@ -56,10 +56,10 @@ class VocabRichness:
         return vocabulary_richness_no_stopwords
 
 
-print('HUMAN WRITTEN TEXT')
-print(f'Vocab richness of text (including stopwords) : {VocabRichness.calculate_total_vocab_richness(human_text_to_analyse)}')
-print(f'Vocab richness of text (excluding stopwords) : {VocabRichness.calculate_total_vocab_richness_no_stopwords(human_text_to_analyse)}')
-print()
-print('AI WRITTEN TEXT')
-print(f'Vocab richness of text (including stopwords) : {VocabRichness.calculate_total_vocab_richness(ai_text_to_analyse)}')
-print(f'Vocab richness of text (excluding stopwords) : {VocabRichness.calculate_total_vocab_richness_no_stopwords(ai_text_to_analyse)}')
+# print('HUMAN WRITTEN TEXT')
+# print(f'Vocab richness of text (including stopwords) : {VocabRichness.calculate_total_vocab_richness(human_text_to_analyse)}')
+# print(f'Vocab richness of text (excluding stopwords) : {VocabRichness.calculate_total_vocab_richness_no_stopwords(human_text_to_analyse)}')
+# print()
+# print('AI WRITTEN TEXT')
+# print(f'Vocab richness of text (including stopwords) : {VocabRichness.calculate_total_vocab_richness(ai_text_to_analyse)}')
+# print(f'Vocab richness of text (excluding stopwords) : {VocabRichness.calculate_total_vocab_richness_no_stopwords(ai_text_to_analyse)}')

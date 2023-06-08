@@ -2,7 +2,7 @@ import re
 import nltk
 import matplotlib.pyplot as plt
 import syllapy
-from TextPreprocessor import preprocessor as pp
+from src.ClassificationMetrics.TextPreprocessor import preprocessor as pp
 
 # Reading in text to analyse from file
 with open(r'C:\Users\ccase\Desktop\Dissertation\Examples of Text\Human\Human_HarryPotter.txt') as f:
