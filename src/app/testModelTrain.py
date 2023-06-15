@@ -1,10 +1,10 @@
-"""Using the *** found on HuggingFace, which is a dataset containing 150k rows, to calculate
-ClassificationMetrics with the final aim of training a machine learning binary classification model to distinguish
-authorship of a given input text."""
+import nltk
 import numpy as np
 import pandas as pd
 from numpy import hstack
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
 from sklearn.svm import SVC
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
@@ -15,9 +15,9 @@ from nltk.tokenize.treebank import TreebankWordDetokenizer
 from src.ClassificationMetrics import perplexity as pp
 from src.ClassificationMetrics.TextPreprocessor import preprocessor as prep
 
-# nltk.download('punkt')
-# nltk.download('stopwords')
-# nltk.download('wordnet')
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
 
 # Read in dataset from csv file
 dataset = pd.read_csv("test.csv")
@@ -105,3 +105,11 @@ svm_model.fit(X_train, y_train)
 # Evaluate the model
 accuracy = svm_model.score(X_test, y_test)
 print("Accuracy:", accuracy)
+
+predictions = svm_model.predict(X_test)
+
+print("-------------CONFUSION MATRIX FOR CLASSIFIER-------------")
+cm = confusion_matrix(y_test, predictions)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=["AI Generated", "Human Written"])
+disp.plot()
+plt.show()
