@@ -19,7 +19,7 @@ class PerplexityBurstiness:
     @staticmethod
     def calculate_perplexity(input_text, model, tokenizer):
         """Calculates the perplexity of a given input text."""
-        inputs = tokenizer.encode(input_text, add_special_tokens=True, return_tensors='pt')
+        inputs = tokenizer.encode(input_text, add_special_tokens=False, return_tensors='pt', truncation=True)
         with torch.no_grad():
             outputs = model(inputs, labels=inputs)
             loss = outputs.loss
@@ -40,14 +40,15 @@ class PerplexityBurstiness:
         tokenized_text = pp.TextPreprocessor.split_into_sentences(input_text)
 
         # Remove new line characters from tokenized list of sentences
-        processed_tokenized_text = []
-        for sentence in tokenized_text:
-            processed_sentence = pp.TextPreprocessor.remove_new_line_chars(sentence)
-            processed_tokenized_text.append(processed_sentence)
+        # processed_tokenized_text = []
+        # for sentence in tokenized_text:
+        #     processed_sentence = pp.TextPreprocessor.remove_new_line_chars(sentence)
+        #     processed_tokenized_text.append(processed_sentence)
 
         # Calculate the individual PPL of each sentence
         sentence_perplexities = []
-        for sentence in processed_tokenized_text:
+        # tokenized_text -> processed_tokenized_text
+        for sentence in tokenized_text:
             perplexity = PerplexityBurstiness.calculate_perplexity(sentence, model_gpt, tokenizer_gpt)
             sentence_perplexities.append(perplexity)
 
@@ -60,13 +61,15 @@ class PerplexityBurstiness:
 
         # Print the sentence with the highest PPL
         # max_index = sentence_perplexities.index(max(sentence_perplexities))
+        # tokenized_text -> processed_tokenized_text
         # print(
         #     f"Sentence with the highest PPL of {round(max(sentence_perplexities), 2)} is sentence {max_index + 1} : "
-        #     f"'{processed_tokenized_text[max_index]}'")
-
+        #     f"'{tokenized_text[max_index]}'")
+        print("Success")
         return {
             'avg_text_ppl': avg_text_ppl,
             'text_burstiness': text_burstiness
         }
 
-# print(process_text_ppl_burstiness(text_to_analyse)['avg_text_ppl'])
+
+# print(PerplexityBurstiness.process_text_ppl_burstiness(text_to_analyse)['avg_text_ppl'])
