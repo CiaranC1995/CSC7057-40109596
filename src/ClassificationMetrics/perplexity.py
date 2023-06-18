@@ -65,7 +65,6 @@ class PerplexityBurstiness:
         # print(
         #     f"Sentence with the highest PPL of {round(max(sentence_perplexities), 2)} is sentence {max_index + 1} : "
         #     f"'{tokenized_text[max_index]}'")
-        print("Success")
         return {
             'avg_text_ppl': avg_text_ppl,
             'text_burstiness': text_burstiness
