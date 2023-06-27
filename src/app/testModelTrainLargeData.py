@@ -7,15 +7,13 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 from sklearn.svm import LinearSVC
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.preprocessing import StandardScaler
-
 import time
 import datetime
 
 start_time = time.time()
 
 # Read in dataset from csv file
-dataset = pd.read_csv(r"C:\Users\ccase\Desktop\Dissertation\Datasets\preprocessed_dataset_boxcox.csv")
+dataset = pd.read_csv(r"C:\Users\ccase\Desktop\Dissertation\Datasets\detokenizedTextForTraining.csv")
 
 print(f'Dataset Read @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
 
@@ -35,10 +33,15 @@ print('Size of Training Set :', len(X_train_text))
 vectorizer = TfidfVectorizer(max_features=10000)
 vectorizer.fit(dataset['text_to_analyse'])
 
-print(f'Vocabulary Fit Complete @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
-
 X_train_text_vectorized = vectorizer.transform(X_train_text)
 X_test_text_vectorized = vectorizer.transform(X_test_text)
+
+vectorizer_path = r'./Vectorizers/tfidfvectorizer.pickle'
+
+with open(vectorizer_path, "wb") as file:
+    pickle.dump(vectorizer, file)
+
+print(f'Vocabulary Fit Complete @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
 
 final_x_train = np.hstack((X_train_text_vectorized.toarray(), np.array(X_train_perplexity).reshape(-1, 1), np.array(X_train_burstiness).reshape(-1, 1)))
 final_x_test = np.hstack((X_test_text_vectorized.toarray(), np.array(X_test_perplexity).reshape(-1, 1), np.array(X_test_burstiness).reshape(-1, 1)))
@@ -61,16 +64,16 @@ svm_recall = recall_score(y_test, y_pred_svm)
 svm_f1 = f1_score(y_test, y_pred_svm)
 svm_roc_auc = roc_auc_score(y_test, y_pred_svm)
 
-print(f"SVM Accuracy: {svm_accuracy * 100}%")
+print(f"SVM Accuracy: {(svm_accuracy * 100):.3f}%")
 print(f"SVM Precision: {svm_precision:.3f}")
 print(f"SVM Recall: {svm_recall:.3f}")
 print(f"SVM F1-score: {svm_f1:.3f}")
 print(f"SVM AUC-ROC: {svm_roc_auc:.3f}")
 
-model_path = r'./Model/SVM_Classifier_EntireDataset_NoWarning.pickle'
-
-with open(model_path, 'wb') as file:
-    pickle.dump(svm_model, file)
+# model_path = r'./Models/SVM_Classifier_EntireDataset_DetokenizedTextTrain.pickle'
+#
+# with open(model_path, 'wb') as file:
+#     pickle.dump(svm_model, file)
 
 num_weights_for_input_feats = np.count_nonzero(svm_model.coef_)
 print("Weights assigned to each feature in the input data:", num_weights_for_input_feats)
