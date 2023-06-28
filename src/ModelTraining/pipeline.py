@@ -6,8 +6,6 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_s
 from sklearn.model_selection import train_test_split, GridSearchCV
 import matplotlib.pyplot as plt
 from sklearn.svm import LinearSVC
-from sklearn.feature_extraction.text import TfidfVectorizer
-
 import time
 import datetime
 
@@ -15,6 +13,11 @@ start_time = time.time()
 
 # Read in dataset from csv file
 dataset = pd.read_csv(r"C:\Users\ccase\Desktop\Dissertation\Datasets\preprocessed_dataset_boxcox.csv")
+
+vectorizer_path = r'./Vectorizers/tfidfvectorizer.pickle'
+
+with open(vectorizer_path, 'rb') as vec_file:
+    vectorizer = pickle.load(vec_file)
 
 print(f'Dataset Read @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
 
@@ -30,14 +33,10 @@ X_train_text, X_test_text, X_train_perplexity, X_test_perplexity, X_train_bursti
 print(f'Dataset Split @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
 print('Size of Training Set :', len(X_train_text))
 
-# Vectorize the textual inputs
-vectorizer = TfidfVectorizer(max_features=10000)
-vectorizer.fit(dataset['text_to_analyse'])
-
-print(f'Vocabulary Fit Complete @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
-
 X_train_text_vectorized = vectorizer.transform(X_train_text)
 X_test_text_vectorized = vectorizer.transform(X_test_text)
+
+print(f'Text Vectorization Complete @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
 
 final_x_train = np.hstack((X_train_text_vectorized.toarray(), np.array(X_train_perplexity).reshape(-1, 1), np.array(X_train_burstiness).reshape(-1, 1)))
 final_x_test = np.hstack((X_test_text_vectorized.toarray(), np.array(X_test_perplexity).reshape(-1, 1), np.array(X_test_burstiness).reshape(-1, 1)))
@@ -46,7 +45,7 @@ print(f'Final Train and Test Data Complete @ {datetime.datetime.now().strftime("
 
 parameter_grid = {
     'C': [0.1, 1, 10],
-    'loss': ['squared_hinge', 'hinge'],
+    'loss': ['squared_hinge'],
     'max_iter': [1000, 10000],
     'dual': [True, False]
 }
