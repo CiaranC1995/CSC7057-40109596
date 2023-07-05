@@ -13,7 +13,8 @@ import datetime
 start_time = time.time()
 
 # Read in dataset from csv file
-dataset = pd.read_csv(r"C:\Users\ccase\Desktop\Dissertation\Datasets\detokenizedTextForTraining.csv")
+dataset = pd.read_csv(
+    r"C:\Users\ccase\Desktop\Dissertation\Datasets\detokenized_preprocessed_dataset_noTransformation.csv")
 
 print(f'Dataset Read @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
 
@@ -70,7 +71,7 @@ print(f"SVM Recall: {svm_recall:.3f}")
 print(f"SVM F1-score: {svm_f1:.3f}")
 print(f"SVM AUC-ROC: {svm_roc_auc:.3f}")
 
-# model_path = r'./Models/SVM_Classifier_EntireDataset_DetokenizedTextTrain.pickle'
+# model_path = r'./Models/SVM_Classifier_EntireDataset_detokenized_NoTransformationOfPPL_Burst.pickle'
 #
 # with open(model_path, 'wb') as file:
 #     pickle.dump(svm_model, file)

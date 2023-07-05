@@ -14,12 +14,14 @@ start_time = time.time()
 
 def process_entry(entry):
     """Lemmatize entry and remove stopwords"""
-    final_words = [
+    word_lemmatizer = WordNetLemmatizer()
+    words = [
         word_lemmatizer.lemmatize(word, tag_map.get(tag[0], 'n'))
         for word, tag in pos_tag(entry)
         if word.isalpha() and word not in stop_words
     ]
-    return str(final_words)
+    final_words = ' '.join(words)
+    return final_words
 
 
 dataset = pd.read_csv(r"C:\Users\ccase\Desktop\Dissertation\Datasets\dataset_ready_to_split_and_transform.csv")
@@ -36,7 +38,6 @@ tag_map['J'] = wn.ADJ
 tag_map['V'] = wn.VERB
 tag_map['R'] = wn.ADV
 
-word_lemmatizer = WordNetLemmatizer()
 stop_words = set(stopwords.words('english'))
 
 # Apply the processing function to each entry in 'text_to_analyse' column

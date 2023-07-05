@@ -39,15 +39,9 @@ class PerplexityBurstiness:
         """Processes the average perplexity and burstiness of an input text"""
         tokenized_text = pp.TextPreprocessor.split_into_sentences(input_text)
 
-        # Remove new line characters from tokenized list of sentences
-        # processed_tokenized_text = []
-        # for sentence in tokenized_text:
-        #     processed_sentence = pp.TextPreprocessor.remove_new_line_chars(sentence)
-        #     processed_tokenized_text.append(processed_sentence)
-
         # Calculate the individual PPL of each sentence
         sentence_perplexities = []
-        # tokenized_text -> processed_tokenized_text
+
         for sentence in tokenized_text:
             perplexity = PerplexityBurstiness.calculate_perplexity(sentence, model_gpt, tokenizer_gpt)
             sentence_perplexities.append(perplexity)
@@ -56,19 +50,8 @@ class PerplexityBurstiness:
         avg_text_ppl = sum(sentence_perplexities) / len(sentence_perplexities)
         text_burstiness = PerplexityBurstiness.calculate_burstiness(sentence_perplexities)
 
-        # print(f'Average text Perplexity : {avg_text_ppl}')
-        # print(f'Burstiness of Text : {text_burstiness}')
-
-        # Print the sentence with the highest PPL
-        # max_index = sentence_perplexities.index(max(sentence_perplexities))
-        # tokenized_text -> processed_tokenized_text
-        # print(
-        #     f"Sentence with the highest PPL of {round(max(sentence_perplexities), 2)} is sentence {max_index + 1} : "
-        #     f"'{tokenized_text[max_index]}'")
         return {
             'avg_text_ppl': avg_text_ppl,
             'text_burstiness': text_burstiness
         }
 
-
-# print(PerplexityBurstiness.process_text_ppl_burstiness(text_to_analyse)['avg_text_ppl'])

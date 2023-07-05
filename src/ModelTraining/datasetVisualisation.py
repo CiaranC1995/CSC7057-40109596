@@ -2,7 +2,7 @@ import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
 
-csv = pd.read_csv(r"perplexity_burstiness_scores.csv")
+csv = pd.read_csv(r"C:\Users\ccase\Desktop\Dissertation\Datasets\perplexity_burstiness_scores.csv")
 
 dataframe = pd.DataFrame()
 
