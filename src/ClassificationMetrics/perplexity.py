@@ -37,12 +37,12 @@ class PerplexityBurstiness:
     @staticmethod
     def process_text_ppl_burstiness(input_text):
         """Processes the average perplexity and burstiness of an input text"""
-        tokenized_text = pp.TextPreprocessor.split_into_sentences(input_text)
+        sentences = pp.TextPreprocessor.split_into_sentences(input_text)
 
         # Calculate the individual PPL of each sentence
         sentence_perplexities = []
 
-        for sentence in tokenized_text:
+        for sentence in sentences:
             perplexity = PerplexityBurstiness.calculate_perplexity(sentence, model_gpt, tokenizer_gpt)
             sentence_perplexities.append(perplexity)
 

@@ -6,7 +6,7 @@ import time
 
 start_time = time.time()
 
-csv = pd.read_csv(r"C:\Users\ccase\Desktop\GPT-wiki-intro.csv")
+csv = pd.read_csv(r"C:\Users\ccase\Desktop\Dissertation\Datasets\GPT-wiki-intro.csv")
 
 csv = csv[csv["generated_intro_len"] >= 150]
 
@@ -30,9 +30,9 @@ dataframe["burstiness"] = burstiness_values
 dataframe["AI Generated"] = [0 for i in range(len(csv))] + [1 for i in range(len(csv))]
 
 # Drop the "text_to_analyse" column
-dataframe.drop("text_to_analyse", axis=1, inplace=True)
+# dataframe.drop("text_to_analyse", axis=1, inplace=True)
 
 # Exporting the dataframe to a CSV file
-dataframe.to_csv("perplexity_burstiness_scores.csv", index=True)
+dataframe.to_csv("NEW_perplexity_burstiness_scores.csv", index=True)
 
 print("Time Elapsed: {:.2f}s".format(time.time() - start_time))

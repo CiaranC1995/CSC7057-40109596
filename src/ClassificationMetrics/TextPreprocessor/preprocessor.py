@@ -14,10 +14,8 @@ class TextPreprocessor:
     @staticmethod
     def split_into_sentences(input_text):
         """Separates a piece of text into sentences."""
-        sentences = sent_tokenize(input_text, language='English')
-        # Ensures that each tokenized sentence contains at least one valid word
-        processed_sentences = [sentence for sentence in sentences if re.search(r'\w', sentence)]
-        return processed_sentences
+        clean_text = input_text.replace('\n', ' ')
+        return re.split(r'(?<=[^A-Z].[.?]) +(?=[A-Z])', clean_text)
 
     @staticmethod
     def num_of_chars(input_text):
