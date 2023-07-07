@@ -1,59 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
+{% block content %}
 
-<body>
+<div class="topSection">
 
-    <nav class="navbar navbar-default">
+    <div class="userInputInterface">
 
-        <div class="container-fluid">
+        <div class="userInputTextBox">
 
-            <div class="navbar-header">
-                <div class="logoDiv"><a href="/"><img src="{{ url_for('static', filename='ai_icon.png') }}" alt="Logo"
-                            class="logo"></a></div>
-                <div class="websiteName"><a class="navbar-brand" href="/">AI Authorship Classifier</a></div>
-            </div>
+            <textarea name="userInputText" cols="30" rows="18"
+                placeholder="Paste or type the text to be classified here ..."></textarea>
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">My History</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Signup</a></li>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="#">Logout</a></li>
-                </ul>
-            </div>
-        </div>
-
-    </nav>
-
-    <div class="topSection">
-
-        <div class="userInputInterface">
-
-            <div class="userInputTextBox">
-
-                <textarea name="userInputText" cols="30" rows="18"
-                    placeholder="Paste or type the text to be classified here ..."></textarea>
-
-                    <!-- This needs fixed, still not correct -->
-                <div class="counts">
-                    <div class="wordCount"><span>Word Count :</span></div>
-                    <div class="charCount"><span>Character Count :</span></div>
-                </div>
-
+            <!-- This needs fixed, still not correct -->
+            <div class="counts">
+                <div class="wordCount"><span>Word Count :</span></div>
+                <div class="charCount"><span>Character Count :</span></div>
             </div>
 
         </div>
+
     </div>
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+{% endblock %}

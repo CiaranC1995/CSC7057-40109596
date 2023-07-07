@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="section">
+
+    {% if not loginStatus %}
+
+    <div class="notification is-danger">
+        <button class="delete"></button>
+        Credentials Not Recognized... Please Try Again...
+    </div>
+
+    <div><a class="button is-primary is-outlined" href="javascript:history.back()">Go back</a></div>
+
+    {% else %}
+
+    <div class="notification is-success">
+        <button class="delete"></button>
+        Congratulations! You have successfully logged in.
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

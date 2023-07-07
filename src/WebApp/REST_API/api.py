@@ -8,9 +8,13 @@ connector = DatabaseConnector(host='localhost', user='root', password='root', da
 # Route for retrieving user info from the database
 @app.route('/getAllUserInfo', methods=['GET'])
 def login():
-    query = "SELECT * FROM user"
-    data = connector.execute_query(query)
-    return jsonify(data)
+
+    try:
+        query = "SELECT * FROM user"
+        data = connector.execute_query(query)
+        return jsonify(data)
+    except Exception as e:
+        return str(e)
 
 if __name__ == '__main__':
     app.run(port=8080, debug=True)
