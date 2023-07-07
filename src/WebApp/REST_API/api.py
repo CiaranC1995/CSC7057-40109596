@@ -1,20 +1,13 @@
-from flask import Flask, jsonify
+from flask import Flask
 from connection import DatabaseConnector
+from routes.loginRoute import loginRoute_blueprint
 
 app = Flask(__name__)
 
 connector = DatabaseConnector(host='localhost', user='root', password='root', database='csc7057')
 
-# Route for retrieving user info from the database
-@app.route('/getAllUserInfo', methods=['GET'])
-def login():
-
-    try:
-        query = "SELECT * FROM user"
-        data = connector.execute_query(query)
-        return jsonify(data)
-    except Exception as e:
-        return str(e)
+# Register API Blueprints
+app.register_blueprint(loginRoute_blueprint)
 
 if __name__ == '__main__':
     app.run(port=8080, debug=True)
