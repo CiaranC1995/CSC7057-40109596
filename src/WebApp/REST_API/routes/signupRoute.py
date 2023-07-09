@@ -40,7 +40,7 @@ def signup():
 @signupRoute_blueprint.route('/getAllUserInfo', methods=['GET'])
 def get_all_user_info():
     try:
-        getUserInfo = "SELECT * FROM user"
+        getUserInfo = "SELECT SQL_NO_CACHE * FROM user"
         data = connector.execute_query(getUserInfo)
         return jsonify(data)
     except Exception as e:

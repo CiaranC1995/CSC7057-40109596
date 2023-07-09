@@ -1,4 +1,4 @@
-from flask import Flask, session
+from flask import Flask
 from routes.landing import landing_blueprint
 from routes.login import login_blueprint
 from routes.logout import logout_blueprint

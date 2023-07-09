@@ -22,16 +22,18 @@ def login_post_route():
     endpoint = 'http://127.0.0.1:8080/getAllUserInfo'
 
     try:
-        api_response = requests.get(endpoint)
+        headers = {'Cache-Control': 'no-cache'}
+        api_response = requests.get(endpoint, headers=headers)
         api_response.raise_for_status() 
 
         user_info = api_response.json()
 
         for user in user_info:
+            
             if username == user[1] or username == user[2]:
 
                 is_match = bcrypt.checkpw(password.encode("utf-8"), user[3].encode("utf-8"))
-
+                print(is_match)
                 if is_match:
 
                     session['user'] = user

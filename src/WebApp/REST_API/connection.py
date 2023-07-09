@@ -7,7 +7,8 @@ class DatabaseConnector:
             host=host,
             user=user,
             password=password,
-            database=database
+            database=database,
+            autocommit=True
         )
     
     def execute_query(self, query, values=None):
