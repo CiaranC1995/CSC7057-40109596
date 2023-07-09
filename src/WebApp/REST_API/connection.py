@@ -9,16 +9,22 @@ class DatabaseConnector:
             password=password,
             database=database
         )
-
-        # Check if the connection is established
-        if self.connection.is_connected():
-            print("Database connection established.")
-        else:
-            print("Database connection failed.")
-
-    def execute_query(self, query):
+    
+    def execute_query(self, query, values=None):
         cursor = self.connection.cursor()
-        cursor.execute(query)
+        if values:
+            cursor.execute(query, values)
+        else:
+            cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
         return data
+    
+    def execute_insert_query(self, query, values=None):
+        cursor = self.connection.cursor()
+        if values:
+            cursor.execute(query, values)
+        else:
+            cursor.execute(query)
+        self.connection.commit()
+        cursor.close()

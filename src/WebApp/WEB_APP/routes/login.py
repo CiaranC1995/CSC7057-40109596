@@ -1,5 +1,6 @@
 from flask import render_template, Blueprint, session, request
 import requests
+import bcrypt
 
 login_blueprint = Blueprint('login', __name__)
 
@@ -25,15 +26,21 @@ def login_post_route():
         api_response.raise_for_status() 
 
         user_info = api_response.json()
-        for user in user_info:
 
-            if username == user[1] and password == user[3]:
-                session['user'] = user
-                session['user_id'] = user[0]
-                session['authen'] = True
-                loginStatus = True
-                loginMessage = f"Login Successful... Welcome Back {username}"
-                return render_template('loginMessage.html', loginStatus=loginStatus, loginMessage=loginMessage)
+        for user in user_info:
+            if username == user[1] or username == user[2]:
+
+                is_match = bcrypt.checkpw(password.encode("utf-8"), user[3].encode("utf-8"))
+
+                if is_match:
+
+                    session['user'] = user
+                    session['user_id'] = user[0]
+                    session['authen'] = True
+
+                    loginStatus = True
+                    loginMessage = f"Login Successful... Welcome Back {username}"
+                    return render_template('loginMessage.html', loginStatus=loginStatus, loginMessage=loginMessage)
 
         loginStatus = False
         loginMessage = 'Credentials Not Recognized... Please Try Again...'

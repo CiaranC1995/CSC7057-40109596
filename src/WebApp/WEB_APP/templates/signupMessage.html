@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="section">
+
+    {% if doesUserAlreadyExist %}
+
+    <div class="notification is-danger">
+        <button class="delete"></button>
+        Sorry, that email address or username already exists in our system. Please try again.
+    </div>
+
+    <div><a class="button is-primary is-outlined" href="javascript:history.back()">Go back</a></div>
+
+    {% else %}
+
+    <div class="notification is-success">
+        <button class="delete"></button>
+        Congratulations! You have successfully registered an account.
+    </div>
+
+    <div class="buttons">
+        <a href="/login" class="button">Login</a>
+        <a href="/" class="button">Home</a>
+    </div>
+
+    {% endif %}
+
+</section>
+
+
+{% endblock %}
