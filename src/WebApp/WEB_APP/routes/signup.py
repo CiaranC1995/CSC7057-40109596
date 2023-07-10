@@ -37,7 +37,7 @@ def signup_route_post():
     if does_user_already_exist:
         return render_template("signupMessage.html", doesUserAlreadyExist=does_user_already_exist, loginMessage=login_message, loginStatus=login_status)
     else:
-        endpoint = "http://127.0.0.1:8080/signup"
+        endpoint = "http://127.0.0.1:8080/signupRoute"
         payload = {
             "username": username,
             "email": email,

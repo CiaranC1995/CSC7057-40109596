@@ -12,7 +12,6 @@ def get_all_user_info():
     try:
         getUserInfo = "SELECT SQL_NO_CACHE * FROM user"
         data = connector.execute_query(getUserInfo)
-        print(data)
         return jsonify(data)
     except Exception as e:
         return str(e)

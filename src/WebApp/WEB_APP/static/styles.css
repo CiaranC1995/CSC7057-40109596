@@ -5,7 +5,6 @@
 
 .logoDiv {
     margin-right: 10px;
-
 }
 
 .logo {
@@ -19,35 +18,53 @@
 
 .topSection {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+}
+
+.limitationsSection {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.limitationsSection p {
+    font-weight: bold;
 }
 
 .userInputInterface {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-}
-
-.userInputTextBox {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    width: 1000px;
     align-items: center;
 }
 
-.userInputTextBox textarea {
-    width: 100%;
+.userInputTextBox {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+textarea[name="userInputText"] {
+    width: 700px;
+    height: 350px;
+    resize: none;
+    padding: 5px;
 }
 
 .counts {
-    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .wordCount,
 .charCount {
-    margin-left: 10px;
+    font-weight: bold;
+}
+
+.beginAnalysisButton {
+    padding: 10px 20px;
+    font-weight: bold;
 }
 
 .section {
@@ -55,4 +72,29 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
+  }
+  
+  .contact-form {
+    text-align: center;
+  }
+  
+  .field {
+    margin-bottom: 20px;
+  }
+  
+  .label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .input,
+  .textarea {
+    width: 300px;
+    padding: 5px;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    font-weight: bold;
+  }
+  

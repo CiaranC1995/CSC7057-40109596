@@ -10,8 +10,8 @@ connector = DatabaseConnector(
 signupRoute_blueprint = Blueprint("signupRoute", __name__)
 
 
-# Route for retrieving user info from the database
-@signupRoute_blueprint.route("/signup", methods=["POST"])
+# Route for creating a user in the database
+@signupRoute_blueprint.route("/signupRoute", methods=["POST"])
 def signup():
     username = request.json["username"]
     email = request.json["email"]

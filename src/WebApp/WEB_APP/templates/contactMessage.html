@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="section">
+    {% if isContactMessageCreated %}
+    <div class="notification is-success">
+        <button class="delete"></button>
+        Thanks for your feedback! A member of our team will respond to your message as soon as possible!
+    </div>
+    <br>
+    <div><a class="button is-primary is-outlined" href="javascript:history.back()">Go back</a></div>
+    {% else %}
+    <div class="notification is-danger">
+        <button class="delete"></button>
+        Oh no we didn't seem to get your message, please try again!
+    </div>
+    <div><a class="button is-primary is-outlined" href="javascript:history.back()">Go back</a></div>
+    {% endif %}
+</section>
+
+
+{% endblock %}
