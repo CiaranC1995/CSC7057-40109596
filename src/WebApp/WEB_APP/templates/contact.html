@@ -10,41 +10,40 @@
 
         <form action="/contact" method="post">
 
-            <div class="field">
+            <div class="form-group">
+
                 <label class="label" for="name">Name:</label>
-                <div class="control">
-                    <input class="input" type="text" id="name" placeholder="Enter your name" name="name" required maxlength="255">
-                </div>
+                <input class="input" type="text" id="name" placeholder="Enter your name" name="name" required
+                    maxlength="255">
+
             </div>
 
-            <div class="field">
+            <div class="form-group">
+
                 <label class="label" for="email">Email:</label>
-                <div class="control">
-                    <input class="input" type="email" id="email" placeholder="Enter your email" name="email" required maxlength="255">
-                </div>
+                <input class="input" type="email" id="email" placeholder="Enter your email" name="email" required
+                    maxlength="255">
+
             </div>
 
-            <div class="field">
+            <div class="form-group">
+
                 <label class="label" for="subject">Subject:</label>
-                <div class="control">
-                    <input class="input" type="text" id="subject" placeholder="Enter the subject of your message"
-                        name="subject" required maxlength="255">
-                </div>
+                <input class="input" type="text" id="subject" placeholder="Enter the subject of your message"
+                    name="subject" required maxlength="255">
+
             </div>
 
-            <div class="field">
+            <div class="form-group">
+
                 <label class="label" for="message">Message:</label>
-                <div class="control">
-                    <textarea class="textarea" id="message" placeholder="Enter your message" name="message" rows="5"
-                        required></textarea>
-                </div>
+                <textarea class="textarea" id="message" placeholder="Enter your message" name="message" rows="5"
+                    required></textarea>
+
             </div>
 
-            <div class="field">
-                <div class="control">
-                    <button class="button is-primary type=" submit>Submit</button>
-                </div>
-            </div>
+            <button class="button is-primary" type="submit">Submit</button>
+
         </form>
 
     </div>

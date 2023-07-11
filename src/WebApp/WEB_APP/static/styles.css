@@ -1,84 +1,80 @@
 .navbar-header {
     display: flex;
     align-items: center;
-}
-
-.logoDiv {
+  }
+  
+  .logoDiv {
     margin-right: 10px;
-}
-
-.logo {
+  }
+  
+  .logo {
     width: 55px;
     height: auto;
-}
-
-.websiteName {
+  }
+  
+  .websiteName {
     flex: 1;
-}
-
-.topSection {
+  }
+  
+  .topSection {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
-
-.limitationsSection {
+  }
+  
+  .limitationsSection {
     margin-bottom: 20px;
     text-align: left;
-}
-
-.limitationsSection p {
+  }
+  
+  .limitationsSection p {
     font-weight: bold;
-}
-
-.userInputInterface {
+  }
+  
+  .userInputInterface {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.userInputTextBox {
+  }
+  
+  .userInputTextBox {
     margin-bottom: 20px;
     text-align: center;
-}
-
-textarea[name="userInputText"] {
+  }
+  
+  textarea[name="userInputText"] {
     width: 700px;
     height: 350px;
     resize: none;
     padding: 5px;
-}
-
-.counts {
+  }
+  
+  .counts {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
-}
-
-.wordCount,
-.charCount {
+  }
+  
+  .wordCount,
+  .charCount {
     font-weight: bold;
-}
-
-.beginAnalysisButton {
+  }
+  
+  .beginAnalysisButton {
     padding: 10px 20px;
     font-weight: bold;
-}
-
-.section {
+  }
+  
+  .section {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
   }
   
-  .contact-form {
-    text-align: center;
-  }
-  
-  .field {
+  .form-group {
     margin-bottom: 20px;
   }
   

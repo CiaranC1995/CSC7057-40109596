@@ -4,52 +4,34 @@
 
 <section class="section">
 
-    <div class="signupForm">
+    <div class="signup-form">
 
-        <h3 class="formTitle">Sign Up</h3>
+        <h2 class="title">Sign Up</h2>
 
         <form class="form" action="/signup" method="POST">
 
-            <div class="field">
+            <div class="form-group">
 
                 <label class="label">Username</label>
-
-                <div class="control">
-                    <input class="input" type="text" placeholder="Enter your username" name="usernameField" required>
-                </div>
+                <input class="input" type="text" placeholder="Enter your username" name="usernameField" required>
 
             </div>
 
-            <div class="field">
+            <div class="form-group">
 
                 <label class="label">Email</label>
-
-                <div class="control">
-                    <input class="input" type="email" placeholder="Enter your email" name="emailField" required>
-                </div>
+                <input class="input" type="email" placeholder="Enter your email" name="emailField" required>
 
             </div>
 
-            <div class="field">
+            <div class="form-group">
 
                 <label class="label">Password</label>
-
-                <div class="control">
-                    <input class="input" type="password" placeholder="Enter your password" name="passwordField"
-                        required>
-                </div>
+                <input class="input" type="password" placeholder="Enter your password" name="passwordField" required>
 
             </div>
 
-            <br>
-
-            <div class="field">
-
-                <div class="control">
-                    <button class="button is-primary" type="submit">Submit</button>
-                </div>
-
-            </div>
+            <button class="button is-primary" type="submit">Submit</button>
 
         </form>
 
