@@ -75,6 +75,3 @@ def classify_text(input_text, model_path, vectorizer_path):
         'human_probability': human_probability,
         'ai_probability': ai_probability
     }
-
-
-print(classify_text(text_to_analyse, model_path=model_path, vectorizer_path=vect_path))

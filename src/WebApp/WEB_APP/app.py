@@ -4,6 +4,7 @@ from routes.login import login_blueprint
 from routes.logout import logout_blueprint
 from routes.signup import signup_blueprint
 from routes.contact import contact_blueprint
+from routes.classification import classification_blueprint
 
 app = Flask(__name__)
 app.secret_key = 'thisismysecretkey1995'
@@ -14,6 +15,7 @@ app.register_blueprint(landing_blueprint)
 app.register_blueprint(logout_blueprint)
 app.register_blueprint(signup_blueprint)
 app.register_blueprint(contact_blueprint)
+app.register_blueprint(classification_blueprint)
 
 if __name__ == '__main__':
     app.run(debug=True)
