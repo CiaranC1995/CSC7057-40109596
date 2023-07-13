@@ -48,7 +48,6 @@ def login_post_route():
         loginMessage = 'Credentials Not Recognized... Please Try Again...'
         return render_template('loginMessage.html', loginStatus=loginStatus, loginMessage=loginMessage)
 
-    except (requests.RequestException, ValueError) as e:
-        error_message = f"Error occurred: {str(e)}"
-        return render_template('error.html', error_message=error_message)
+    except Exception as e:
+        return f"Error occurred: {str(e)}"
 

@@ -22,10 +22,8 @@ def classification_route_post():
 
     if 'authen' in session:
         user_id = session['user_id']
-        loginStatus = True
     else:
         user_id = -1
-        loginStatus = False
 
     endPoint = 'http://127.0.0.1:8080/classificationRoute'
 
@@ -40,4 +38,14 @@ def classification_route_post():
         "user_id": user_id
     })
 
-    return render_template('classificationResult.html')
+    # Maybe do another query here to return all users information and pass it to the template
+    # Need a new API route developed 
+    # endpoint1 = ''
+
+    # try:
+    #     user_info = requests.get(endpoint1).json
+
+    # except Exception as e:
+    #     return f"Error occurred: {str(e)}"
+    
+    return render_template('classificationResult.html', classification_result=classification_result)

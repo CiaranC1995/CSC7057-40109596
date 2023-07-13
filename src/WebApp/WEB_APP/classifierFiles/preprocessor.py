@@ -1,10 +1,4 @@
-from nltk.tokenize import sent_tokenize
 import re
-
-# Reading in text to analyse from file
-with open(r'C:\Users\ccase\Desktop\Dissertation\Examples of Text\Human\Human_HarryPotter.txt') as f:
-    text_to_analyse = f.read()
-
 
 class TextPreprocessor:
 

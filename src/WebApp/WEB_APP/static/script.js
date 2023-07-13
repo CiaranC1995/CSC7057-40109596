@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (event) {
         if (!validateForm()) {
             event.preventDefault(); 
+        } else {
+            showLoading()
         }
     });
 });
@@ -46,7 +48,8 @@ function showLoading() {
 
 function validateForm() {
     var userInputText = document.getElementById('userInputText');
-    if (userInputText.value.trim() === '') {
+    var words = userInputText.value.trim().split(/\s+/);
+    if ((userInputText.value.trim() === '') || (words.length < 2)) {
         return false;
     }
     return true;

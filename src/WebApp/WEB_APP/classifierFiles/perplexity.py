@@ -6,11 +6,6 @@ from classifierFiles.preprocessor import TextPreprocessor as pp
 tokenizer_gpt = GPT2Tokenizer.from_pretrained('gpt2')
 model_gpt = GPT2LMHeadModel.from_pretrained('gpt2')
 
-# Reading in text to analyse from file
-with open(r'C:\Users\ccase\Desktop\Dissertation\Examples of Text\Human\Human_HarryPotter.txt') as f:
-    text_to_analyse = f.read()
-
-
 class PerplexityBurstiness:
 
     def __init__(self):
