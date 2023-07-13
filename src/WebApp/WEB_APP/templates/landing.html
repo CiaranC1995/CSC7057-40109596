@@ -4,7 +4,7 @@
 
 <div class="topSection">
 
-    <div class="limitationsSection">
+    <div id="limitations" class="limitationsSection">
         <p>Please be aware of the following when using this system:</p>
         <ul>
             <li>The classifier may occasionally output incorrect classificaitions.</li>
@@ -18,10 +18,15 @@
 
     <form class="userInputInterface" action="/classification" method="POST">
 
-        <div class="userInputTextBox">
+        <div id="loadingContainer" style="display: none;">
+            <img src="{{ url_for('static', filename='loading.gif') }}" alt="Loading Icon" />
+            <p style="align-items: center;">Analysing Text ...</p>
+        </div>
+
+        <div id="uiTextbox" class="userInputTextBox">
 
             <textarea id="userInputText" name="userInputText" cols="30" rows="18"
-                placeholder="Paste or type the text to be classified here ..."></textarea>
+                placeholder="Paste or type the text to be classified here ..." required></textarea>
 
             <div class="counts">
 
@@ -30,7 +35,7 @@
 
             </div>
 
-            <button type="submit" class="beginAnalysisButton">Begin Analysis</button>
+            <button id="submitBtn" type="submit" class="beginAnalysisButton">Begin Analysis</button>
 
         </div>
 

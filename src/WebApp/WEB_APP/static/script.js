@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
     var userInputText = document.getElementById('userInputText');
     userInputText.addEventListener('input', updateCounts);
+
+    var form = document.querySelector('.userInputInterface');
+    // form.addEventListener('submit', showLoading);
+    form.addEventListener('submit', function (event) {
+        if (!validateForm()) {
+            event.preventDefault(); 
+        }
+    });
 });
 
 function updateCounts() {
@@ -19,4 +27,27 @@ function updateCounts() {
 
     wordCount.textContent = 'Word Count: ' + numWords;
     charCount.textContent = 'Character Count: ' + numChars;
+}
+
+function showLoading() {
+    var loadingContainer = document.getElementById('loadingContainer');
+    loadingContainer.style.display = 'block';
+    uiTextbox.style.display = 'none';
+    limitations.style.display = 'none';
+
+    style="display: none;"
+
+    // Simulate a delay of 15 seconds
+    setTimeout(function () {
+        var loadingContainer = document.getElementById('loadingContainer');
+        loadingContainer.style.display = 'none';
+    }, 15000);
+}
+
+function validateForm() {
+    var userInputText = document.getElementById('userInputText');
+    if (userInputText.value.trim() === '') {
+        return false;
+    }
+    return true;
 }
