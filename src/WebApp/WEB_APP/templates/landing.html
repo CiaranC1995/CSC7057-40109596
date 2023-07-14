@@ -2,40 +2,48 @@
 
 {% block content %}
 
-<div class="topSection">
+<div class="container topSection">
 
     <div id="limitations" class="limitationsSection">
-        <p>Please be aware of the following when using this system:</p>
-        <ul>
-            <li>The classifier may occasionally output incorrect classificaitions.</li>
-            <li>A classification result from this system alone should never be used as proof in a plagiarism dispute in
-                any academic / professional
-                capacity.</li>
-            <li>Further expert analysis of text is needed to definitively prove whether it is human written or AI
-                generated.</li>
-        </ul>
+        <div class="warningImage"><img src="{{ url_for('static', filename='warning.png') }}" alt="Logo" class="logo">
+        </div>
+        <div class="warningText">
+            <p class="lead">Please be aware of the following when using this system:</p>
+            <ul>
+                <li>The classifier may occasionally output incorrect classifications.</li>
+                <li>A classification result from this system alone should never be used as proof in a plagiarism dispute
+                    in
+                    any academic/professional capacity.</li>
+                <li>Further expert analysis of text is needed to definitively prove whether it is human written or AI
+                    generated.</li>
+            </ul>
+        </div>
     </div>
 
     <form class="userInputInterface" action="/classification" method="POST">
 
         <div id="loadingContainer" style="display: none;">
             <img src="{{ url_for('static', filename='loading.gif') }}" alt="Loading Icon" />
-            <p style="align-items: center;">Analysing Text ...</p>
+            <p>Analysing Text ...</p>
         </div>
 
         <div id="uiTextbox" class="userInputTextBox">
 
-            <textarea id="userInputText" name="userInputText" cols="30" rows="18"
+            <textarea id="userInputText" name="userInputText" cols="30" rows="18" class="form-control"
                 placeholder="Paste or type the text to be classified here ..." required></textarea>
 
-            <div class="counts">
+            <div class="row counts">
 
-                <div class="wordCount"><span>Word Count :</span></div>
-                <div class="charCount"><span>Character Count :</span></div>
+                <div class="col-6">
+                    <div class="wordCount"><span>Word Count:</span></div>
+                </div>
+                <div class="col-6">
+                    <div class="charCount"><span>Character Count:</span></div>
+                </div>
 
             </div>
 
-            <button id="submitBtn" type="submit" class="beginAnalysisButton">Begin Analysis</button>
+            <button id="submitBtn" type="submit" class="btn btn-dark">Analyse</button>
 
         </div>
 

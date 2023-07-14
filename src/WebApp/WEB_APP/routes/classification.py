@@ -38,14 +38,13 @@ def classification_route_post():
         "user_id": user_id
     })
 
-    # Maybe do another query here to return all users information and pass it to the template
-    # Need a new API route developed 
-    # endpoint1 = ''
+    endpoint1 = 'http://127.0.0.1:8080/specificUser'
 
-    # try:
-    #     user_info = requests.get(endpoint1).json
+    try:
+        api_response = requests.get(endpoint1, json={"user_id": user_id})
+        user_info = api_response.json()
 
-    # except Exception as e:
-    #     return f"Error occurred: {str(e)}"
+    except Exception as e:
+        return f"Error occurred: {str(e)}"
     
-    return render_template('classificationResult.html', classification_result=classification_result)
+    return render_template('classificationResult.html', classification_result=classification_result, user_info=user_info)

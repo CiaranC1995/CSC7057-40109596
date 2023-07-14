@@ -6,7 +6,7 @@ contact_blueprint = Blueprint('contact', __name__)
 @contact_blueprint.route('/contact', methods=['GET'])
 def contact_route():
     if 'authen' in session:
-        loginMessage = f"Already Logged In as '{session['user'][1]}'"
+        loginMessage = f"Logged In as '{session['user'][1]}'"
         loginStatus = True
         return render_template('contact.html', sessionObject=session, loginStatus=loginStatus, loginMessage=loginMessage)
     else:
@@ -16,7 +16,7 @@ def contact_route():
 @contact_blueprint.route('/contact', methods=['POST'])
 def contact_route_post():
     if 'authen' in session:
-        loginMessage = f"Already Logged In as '{session['user'][1]}'"
+        loginMessage = f"Logged In as '{session['user'][1]}'"
         loginStatus = True 
     else:
         loginStatus = False

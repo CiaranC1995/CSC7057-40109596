@@ -3,17 +3,14 @@
 {% block content %}
 
 <section id="results" class="classResults">
-
-    <!-- Not currently working -->
-    <h1>Classification Result : {{ classification_result }}</h1>
-    <h1></h1>
-    <h1></h1>
-    <h1></h1>
-    <h1></h1>
-    <h1></h1>
-    <h1></h1>
-    <h1></h1>
-
+    <div class="container">
+        <h1 class="display-4">Text Perplexity: {{ classification_result['text_perplexity'] }}</h1>
+        <h1 class="display-4">Text Burstiness: {{ classification_result['text_burstiness'] }}</h1>
+        <h1 class="display-4">Classifier Result: {{ classification_result['classifier_output'].item() }}</h1>
+        <h1 class="display-4">Prob Human Authorship: {{ classification_result['human_probability'] }}</h1>
+        <h1 class="display-4">Prob AI Authorship: {{ classification_result['ai_probability'] }}</h1>
+        <h1 class="display-4"></h1>
+    </div>
 </section>
 
 {% endblock %}
