@@ -40,6 +40,8 @@ def classification_route_post():
 
     endpoint1 = 'http://127.0.0.1:8080/specificUser'
 
+    sentences_perplexities = zip(classification_result['sentences'], classification_result['sentence_perplexities'])
+
     try:
         api_response = requests.get(endpoint1, json={"user_id": user_id})
         user_info = api_response.json()
@@ -47,4 +49,4 @@ def classification_route_post():
     except Exception as e:
         return f"Error occurred: {str(e)}"
     
-    return render_template('classificationResult.html', classification_result=classification_result, user_info=user_info)
+    return render_template('classificationResult.html', classification_result=classification_result, user_info=user_info, sentences_perplexities=sentences_perplexities)

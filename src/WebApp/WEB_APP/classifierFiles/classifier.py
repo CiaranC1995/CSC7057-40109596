@@ -71,5 +71,7 @@ class TextClassifier:
             'text_burstiness': burstiness_value,
             'classifier_output': predicted_output,
             'human_probability': human_probability,
-            'ai_probability': ai_probability
+            'ai_probability': ai_probability,
+            'sentences': results['sentences'],
+            'sentence_perplexities': results['sentence_perplexities']
         }

@@ -46,6 +46,8 @@ class PerplexityBurstiness:
         text_burstiness = PerplexityBurstiness.calculate_burstiness(sentence_perplexities)
 
         return {
+            'sentences': sentences,
+            'sentence_perplexities': sentence_perplexities,
             'avg_text_ppl': avg_text_ppl,
             'text_burstiness': text_burstiness
         }
