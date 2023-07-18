@@ -6,6 +6,7 @@ from routes.contactRoute import contactRoute_blueprint
 from routes.classificationRoute import classificationRoute_blueprint
 from routes.specificUser import specificUser_blueprint
 from routes.userResults import userResults_blueprint
+from routes.sentencePerplexityRoute import sentencePerplexityRoute_blueprint
 
 app = Flask(__name__)
 
@@ -18,6 +19,7 @@ app.register_blueprint(contactRoute_blueprint)
 app.register_blueprint(classificationRoute_blueprint)
 app.register_blueprint(specificUser_blueprint)
 app.register_blueprint(userResults_blueprint)
+app.register_blueprint(sentencePerplexityRoute_blueprint)
 
 if __name__ == '__main__':
     app.run(port=8080, debug=True)

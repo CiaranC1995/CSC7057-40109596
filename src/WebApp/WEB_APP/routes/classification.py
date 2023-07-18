@@ -20,6 +20,9 @@ def classification_route_post():
     human_probability = classification_result['human_probability']
     ai_probability = classification_result['ai_probability']
 
+    # Join two lists for ease of processing
+    sentences_perplexities = list(zip(classification_result['sentences'], classification_result['sentence_perplexities']))
+
     if 'authen' in session:
         user_id = session['user_id']
         loginStatus = True
@@ -29,7 +32,7 @@ def classification_route_post():
 
     endPoint = 'http://127.0.0.1:8080/classificationRoute'
 
-    requests.post(endPoint, json={
+    classifier_output_post = requests.post(endPoint, json={
         'raw_input_text': input_text,
         'preprocessed_input_text': processed_input_text,
         'text_perplexity': text_perplexity,
@@ -40,10 +43,22 @@ def classification_route_post():
         'user_id': user_id
     })
 
-    endpoint1 = 'http://127.0.0.1:8080/specificUser'
+    if classifier_output_post.status_code == 200:
+        classifier_output_id = classifier_output_post.json().get('classifier_output_id')
+    else:
+        return "Error: Failed to retrieve classifier_output_id"
 
-    # Join two lists for ease of processing
-    sentences_perplexities = zip(classification_result['sentences'], classification_result['sentence_perplexities'])
+    endpoint2 = 'http://127.0.0.1:8080/sentencePerplexityRoute'
+
+    for index, (sentence, perplexity) in enumerate(sentences_perplexities):
+        requests.post(endpoint2, json={
+            "sentence_number": index + 1,
+            "sentence": sentence,
+            "perplexity": perplexity,
+            "classifier_output_id": classifier_output_id
+        })
+
+    endpoint1 = 'http://127.0.0.1:8080/specificUser'
 
     try:
         api_response = requests.get(endpoint1, json={'user_id': user_id})

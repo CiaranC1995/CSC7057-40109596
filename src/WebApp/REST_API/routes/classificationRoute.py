@@ -34,11 +34,15 @@ def classify():
     )
 
     try:
-        connector.execute_insert_query(createClassificationOutput, values)
+        cursor = connector.execute_insert_query(createClassificationOutput, values)
+
+        inserted_id = cursor.lastrowid
+        print(inserted_id)
 
         return jsonify(
             {
                 "message": "Database Record Created...",
+                "classifier_output_id": inserted_id
             }
         )
     except Exception as e:
