@@ -5,6 +5,8 @@ from routes.signupRoute import signupRoute_blueprint
 from routes.contactRoute import contactRoute_blueprint
 from routes.classificationRoute import classificationRoute_blueprint
 from routes.specificUser import specificUser_blueprint
+from routes.userResults import userResults_blueprint
+
 app = Flask(__name__)
 
 connector = DatabaseConnector(host='localhost', user='root', password='root', database='csc7057')
@@ -15,6 +17,7 @@ app.register_blueprint(signupRoute_blueprint)
 app.register_blueprint(contactRoute_blueprint)
 app.register_blueprint(classificationRoute_blueprint)
 app.register_blueprint(specificUser_blueprint)
+app.register_blueprint(userResults_blueprint)
 
 if __name__ == '__main__':
     app.run(port=8080, debug=True)
