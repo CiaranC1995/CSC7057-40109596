@@ -4,12 +4,12 @@
 
 <section id="results" class="classResults">
 
-    {% if classification_result.classifier_output.item() == 0 and classification_result.human_probability > 0.9 %}
+    {% if classification_result.human_probability > 0.7 %}
 
     <div class="container">
 
         <div class="resultHuman">
-            <h1 class="display-4 humanResult">HUMAN-WRITTEN CONTENT</h1>
+            <h1 class="display-4 humanResult">LIKELY HUMAN-WRITTEN CONTENT</h1>
         </div>
 
         <div class="modelConfidence">
@@ -19,7 +19,7 @@
 
     </div>
 
-    {% elif classification_result.classifier_output.item() == 0 and classification_result.human_probability < 0.9 %}
+    {% elif classification_result.human_probability > 0.5 and classification_result.human_probability < 0.7 %}
         <div class="container">
 
         <div class="resultMixed">
@@ -41,7 +41,7 @@
         <div class="container">
 
             <div class="resultAI">
-                <h1 class="display-4 aiResult">AI-GENERATED CONTENT</h1>
+                <h1 class="display-4 aiResult"> LIKELY AI-GENERATED CONTENT</h1>
             </div>
 
             <div class="modelConfidence">

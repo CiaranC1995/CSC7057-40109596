@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="userHistory">
+
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Input Text</th>
+                    <th>Avg. Perplexity</th>
+                    <th>Burstiness</th>
+                    <th>Human Prob.</th>
+                    <th>AI Prob.</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in history_info %}
+                <tr>
+                    <td class="truncated-text">{{ record[1] }}</td>
+                    <td>{{ "%.3f" % record[3] }}</td>
+                    <td>{{ "%.3f" % record[4] }}</td>
+                    <td>{{ "%.2f" % (record[6] * 100) }}%</td>
+                    <td>{{ "%.2f" % (record[7] * 100) }}%</td>
+                    {% if record[6] > 0.7 %}
+                    <td>Likely Human-Written</td>
+                    {% elif record[6] < 0.7 and record[6]> 0.5 %}
+                        <td>AI and Human Detected</td>
+                        {% else %}
+                        <td>Likely AI-Generated</td>
+                        {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

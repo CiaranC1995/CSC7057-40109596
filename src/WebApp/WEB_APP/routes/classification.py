@@ -22,31 +22,33 @@ def classification_route_post():
 
     if 'authen' in session:
         user_id = session['user_id']
+        loginStatus = True
+        loginMessage = f"Logged In as '{session['user'][1]}'"
     else:
         user_id = -1
 
     endPoint = 'http://127.0.0.1:8080/classificationRoute'
 
     requests.post(endPoint, json={
-        "raw_input_text": input_text,
-        "preprocessed_input_text": processed_input_text,
-        "text_perplexity": text_perplexity,
-        "text_burstiness": text_burstiness,
-        "classifier_output": classifier_output,
-        "human_probability": human_probability,
-        "ai_probability": ai_probability,
-        "user_id": user_id
+        'raw_input_text': input_text,
+        'preprocessed_input_text': processed_input_text,
+        'text_perplexity': text_perplexity,
+        'text_burstiness': text_burstiness,
+        'classifier_output': classifier_output,
+        'human_probability': human_probability,
+        'ai_probability': ai_probability,
+        'user_id': user_id
     })
 
     endpoint1 = 'http://127.0.0.1:8080/specificUser'
 
+    # Join two lists for ease of processing
     sentences_perplexities = zip(classification_result['sentences'], classification_result['sentence_perplexities'])
 
     try:
-        api_response = requests.get(endpoint1, json={"user_id": user_id})
+        api_response = requests.get(endpoint1, json={'user_id': user_id})
         user_info = api_response.json()
-
     except Exception as e:
-        return f"Error occurred: {str(e)}"
+        return str(e)
     
-    return render_template('classificationResult.html', classification_result=classification_result, user_info=user_info, sentences_perplexities=sentences_perplexities)
+    return render_template('classificationResult.html', classification_result=classification_result, user_info=user_info, sentences_perplexities=sentences_perplexities, loginMessage=loginMessage, loginStatus=loginStatus)

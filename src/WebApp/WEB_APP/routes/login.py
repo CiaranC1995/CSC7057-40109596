@@ -22,9 +22,7 @@ def login_post_route():
     endpoint = 'http://127.0.0.1:8080/getAllUserInfo'
 
     try:
-        headers = {'Cache-Control': 'no-cache'}
-        api_response = requests.get(endpoint, headers=headers)
-        api_response.raise_for_status() 
+        api_response = requests.get(endpoint)
 
         user_info = api_response.json()
 
