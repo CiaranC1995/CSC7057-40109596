@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="specificResultDetails">
+
+    <h1>Date of Classification</h1>
+    <p>{{ specificHistoryInfo['classifier_output'][0][1] }}</p>
+    <h1>Input Text</h1>
+    <p> {{ specificHistoryInfo['classifier_output'][0][2] }}</p>
+    <h1>Average Text Perplexity</h1>
+    <p> {{ specificHistoryInfo['classifier_output'][0][4] }}</p>
+    <h1>Text Burstiness</h1>
+    <p> {{ specificHistoryInfo['classifier_output'][0][5] }}</p>
+    <h1>Classification Result</h1>
+
+    {% if specificHistoryInfo['classifier_output'][0][7] > 0.7 %}
+    <p>Likely Human-Written</p>
+    {% elif specificHistoryInfo['classifier_output'][0][7] < 0.7 and specificHistoryInfo['classifier_output'][0][7]> 0.5
+        %}
+        <p>AI and Human Detected</p>
+        {% else %}
+        <p>Likely AI-Generated</p>
+        {% endif %}
+
+        <h1>Probability of Human Authorship</h1>
+        <p> {{ specificHistoryInfo['classifier_output'][0][7] }}</p>
+        <h1>Probability of AI Authorship</h1>
+        <p> {{ specificHistoryInfo['classifier_output'][0][8] }}</p>
+
+        {% set ppls = specificHistoryInfo['sentence_perplexity'] %}
+    {% set max_value = ppls|max %}
+    {% set max_index = ppls.index(max_value) %}
+
+    <h1>Individual Sentence Perplexities</h1>
+
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Sentence</th>
+                    <th>Perplexity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in specificHistoryInfo['sentence_perplexity'] %}
+                <tr {% if item[4] < 25 %} class="highlight" {% endif %}>
+                    <td>{{ item[2] }}</td>
+                    <td>{{ "%.3f" % item[3] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <h1>Sentence With Highest Perplexity</h1>
+    <!-- ****************************************************************** -->
+
+    
+</section>
+
+
+{% endblock %}

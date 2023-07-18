@@ -1,3 +1,4 @@
+import datetime
 from flask import render_template, Blueprint, session, request
 import requests
 
@@ -12,6 +13,8 @@ def classification_route_post():
 
     classifier = TextClassifier(r'C:/Users/ccase/Desktop/CSC7057-40109596/src/ModelTraining/Models/LinearSVC_Classifier_EntireDataset_detokenized_NoTransformationOfPPL_Burst.pickle', r'C:/Users/ccase/Desktop/CSC7057-40109596/src/ModelTraining/Vectorizers/tfidfvectorizer.pickle')
     classification_result = classifier.classify_text(input_text=input_text)
+
+    date_of_classification = datetime.date.today().strftime("%d/%m/%Y")
 
     processed_input_text = classification_result['processed_input_text']
     text_perplexity = classification_result['text_perplexity']
@@ -33,6 +36,7 @@ def classification_route_post():
     endPoint = 'http://127.0.0.1:8080/classificationRoute'
 
     classifier_output_post = requests.post(endPoint, json={
+        'date_of_classification': date_of_classification,
         'raw_input_text': input_text,
         'preprocessed_input_text': processed_input_text,
         'text_perplexity': text_perplexity,
@@ -43,6 +47,8 @@ def classification_route_post():
         'user_id': user_id
     })
 
+    print(classifier_output_post.content)
+    
     if classifier_output_post.status_code == 200:
         classifier_output_id = classifier_output_post.json().get('classifier_output_id')
     else:

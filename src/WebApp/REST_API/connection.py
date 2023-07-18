@@ -29,4 +29,3 @@ class DatabaseConnector:
             cursor.execute(query)
         self.connection.commit()
         return cursor
-        cursor.close()
