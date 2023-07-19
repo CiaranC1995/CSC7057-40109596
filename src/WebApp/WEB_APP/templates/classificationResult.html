@@ -2,51 +2,73 @@
 
 {% block content %}
 
-<section id="results" class="classResults">
+<section class="container">
 
     {% if classification_result.human_probability > 0.7 %}
 
     <div class="container">
 
-        <div class="resultHuman">
+        <div class="container resultHuman">
             <h1 class="display-4 humanResult">LIKELY HUMAN-WRITTEN CONTENT</h1>
-        </div>
-
-        <div class="modelConfidence">
-            <h3 class="display-5">Probability of Human Authorship: {{ "%.2f" %
-                (classification_result['human_probability'] * 100) }}%</h3>
         </div>
 
     </div>
 
-    {% elif classification_result.human_probability > 0.5 and classification_result.human_probability < 0.7 %}
-        <div class="container">
+    <div class="container modelConfidence">
+        <h3 class="display-5">Probability of Human Authorship: {{ "%.2f" %
+            (classification_result['human_probability'] * 100) }}%</h3>
+    </div>
 
-        <div class="resultMixed">
+    <div class="container modelConfidence">
+        <h3 class="display-5">Probability of AI Authorship: {{ "%.2f" %
+            (classification_result['ai_probability'] * 100) }}%</h3>
+    </div>
+
+    {% elif classification_result.human_probability > 0.5 and classification_result.human_probability < 0.7 %} <div
+        class="resultsContainer">
+
+        <div class="container resultMixed">
             <h2 class="display-4 mixedResult">LIKELY A MIXTURE OF AI-GENERATED AND HUMAN-WRITTEN CONTENT</h2>
         </div>
 
-        <div class="modelConfidence">
-            <h3>Model Probabilities :</h3>
-            <h3>Human Authorship: {{ "%.2f" %
-                (classification_result['human_probability'] * 100) }}%</h3>
-            <h3>AI Authorship: {{ "%.2f" % (classification_result['ai_probability'] *
-                100) }}%</h3>
+        <div class="container modelConfidence">
+
+            <div class="container">
+                <h3>Human Authorship: {{ "%.2f" %
+                    (classification_result['human_probability'] * 100) }}%</h3>
+            </div>
+
+
+            <div class="container">
+                <h3>AI Authorship: {{ "%.2f" % (classification_result['ai_probability'] *
+                    100) }}%</h3>
+            </div>
+
         </div>
 
         </div>
 
         {% else %}
 
-        <div class="container">
+        <div class=" container resultsContainer">
 
-            <div class="resultAI">
+            <div class="container resultAI">
                 <h1 class="display-4 aiResult"> LIKELY AI-GENERATED CONTENT</h1>
             </div>
 
-            <div class="modelConfidence">
-                <h3 class="display-5">Probability of AI Authorship: {{ "%.2f" % (classification_result['ai_probability']
-                    * 100) }}%</h3>
+            <div class="container modelConfidence">
+
+                <div class="container">
+                    <h3 class="display-5">Probability of AI Authorship: {{ "%.2f" %
+                        (classification_result['ai_probability']
+                        * 100) }}%</h3>
+                </div>
+
+                <div class="container">
+                    <h3 class="display-5">Probability of Human Authorship: {{ "%.2f" %
+                        (classification_result['human_probability'] * 100) }}%</h3>
+                </div>
+
             </div>
 
         </div>
@@ -57,12 +79,20 @@
         {% set max_value = ppls|max %}
         {% set max_index = ppls.index(max_value) %}
 
-        <div class="container">
-            <h1 class="display-4">Average Text Perplexity: {{ "%.3f" % classification_result['text_perplexity'] }}</h1>
-            <h1 class="display-4">Text Burstiness: {{ "%.3f" % classification_result['text_burstiness'] }}</h1>
+        <div class="container resultsContainer">
+
+            <div class="container">
+                <h3 class="display-4">Average Text Perplexity: {{ "%.3f" % classification_result['text_perplexity'] }}
+                </h3>
+            </div>
+
+            <div class="container">
+                <h3 class="display-4">Text Burstiness: {{ "%.3f" % classification_result['text_burstiness'] }}</h3>
+            </div>
+
         </div>
 
-        <div class="container">
+        <div class="container resultsContainer">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -81,9 +111,14 @@
             </table>
 
             <div class="container">
+                <h3>Sentence With Highest Perplexity</h3>
+            </div>
 
-                <h4>The sentence with the highest perplexity ... "{{ classification_result['sentences'][max_index] }}"
-                    ... has a perplexity score of : {{ "%.3f" % max_value }}</h4>
+            <div class="container resultsContainer">
+
+                <p>The sentence with the highest perplexity ... <i>"{{ classification_result['sentences'][max_index]
+                        }}"</i>
+                    ... has a perplexity score of : <b>{{ "%.3f" % max_value }}</b></p>
 
             </div>
 

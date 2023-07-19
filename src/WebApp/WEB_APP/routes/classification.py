@@ -32,6 +32,8 @@ def classification_route_post():
         loginMessage = f"Logged In as '{session['user'][1]}'"
     else:
         user_id = -1
+        loginStatus = False
+        loginMessage = f""
 
     endPoint = 'http://127.0.0.1:8080/classificationRoute'
 
@@ -46,8 +48,6 @@ def classification_route_post():
         'ai_probability': ai_probability,
         'user_id': user_id
     })
-
-    print(classifier_output_post.content)
     
     if classifier_output_post.status_code == 200:
         classifier_output_id = classifier_output_post.json().get('classifier_output_id')

@@ -148,7 +148,7 @@ textarea[name="userInputText"] {
 .mixedResult,
 .humanResult,
 .aiResult {
-  font-size: 260%;
+  font-size: 240%;
 }
 
 .highlight {
@@ -165,8 +165,9 @@ textarea[name="userInputText"] {
 .container {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 90vh;
+  padding-top: 10px;
 }
 
 .formContainer {
@@ -184,8 +185,21 @@ textarea[name="userInputText"] {
   padding: 20px;
 }
 
+.emptyMessage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.emptyMessageContainer {
+  margin: 10px;
+  /* Optional: Add some spacing between the h3 and p elements */
+}
+
 .container-inner {
-  width: 80%; 
+  width: 80%;
 }
 
 .alert {
@@ -210,7 +224,28 @@ textarea[name="userInputText"] {
   text-align: center;
 }
 
-.inputForm{
+.inputForm {
   width: 70%;
   height: 50vh;
+}
+
+.aboutUs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.aboutUsContainer {
+  margin: 10px;
+}
+
+.table td {
+  text-align: center;
+}
+
+.table th {
+  text-align: center;
 }

@@ -4,6 +4,26 @@
 
 <section class="userHistory">
 
+    {% if empty_message %}
+
+    <div class="emptyMessage">
+
+        <div class="emptyMessageContainer">
+            <h3>{{ empty_message }}</h3>
+        </div>
+
+        <div class="emptyMessageContainer">
+            <p>Please analyse some text and come back to see detailed results.</p>
+        </div>
+
+        <div class="emptyMessageContainer">
+            <a href="/"><button class="btn btn-dark">Analyse</button></a>
+        </div>
+
+    </div>
+
+    {% else %}
+
     <div class="historyContainer">
         <table class="table table-striped">
             <thead>
@@ -34,13 +54,20 @@
                         {% else %}
                         <td>Likely AI-Generated</td>
                         {% endif %}
-                        <td><a href="/specificHistory?classifier_output_id={{ record[0] }}"><button type="button" class="btn btn-dark">Details</button></a></td>
+                        <td><a href="/specificHistory?classifier_output_id={{ record[0] }}"><button type="button"
+                                    class="btn btn-dark">Details</button></a></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
 
     </div>
+
+    <hr>
+
+    <div class="container"><a href="#"><button class="btn-danger">Clear History</button></a></div>
+
+    {% endif %}
 
 </section>
 

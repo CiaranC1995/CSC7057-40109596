@@ -37,6 +37,7 @@ def login_post_route():
                     session['user'] = user
                     session['user_id'] = user[0]
                     session['authen'] = True
+                    session['session_timed_out'] = False
 
                     loginStatus = True
                     loginMessage = f"Login Successful... Welcome Back {username}"

@@ -8,10 +8,10 @@ def contact_route():
     if 'authen' in session:
         loginMessage = f"Logged In as '{session['user'][1]}'"
         loginStatus = True
-        return render_template('contact.html', sessionObject=session, loginStatus=loginStatus, loginMessage=loginMessage)
+        return render_template('contact.html', loginStatus=loginStatus, loginMessage=loginMessage)
     else:
         loginStatus = False
-        return render_template('contact.html', loginStatus=loginStatus, sessionObject=session)
+        return render_template('contact.html', loginStatus=loginStatus)
     
 @contact_blueprint.route('/contact', methods=['POST'])
 def contact_route_post():

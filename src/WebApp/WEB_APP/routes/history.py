@@ -15,6 +15,11 @@ def history_route():
         try:
             api_response = requests.get(endpoint, json={"user_id": user_id})
             history_info = api_response.json()
+
+            if not history_info:
+                empty_message = "No previous classification data available."
+                return render_template('history.html', loginStatus=loginStatus, loginMessage=loginMessage, empty_message=empty_message)
+
         except Exception as e:
             return str(e)
 

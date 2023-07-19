@@ -14,7 +14,8 @@
 
         <div class="container-fluid">
 
-            <div><a href="/"><img src="{{ url_for('static', filename='ai_icon.png') }}" alt="Logo" class="logo"></a></div>
+            <div><a href="/"><img src="{{ url_for('static', filename='ai_icon.png') }}" alt="Logo" class="logo"></a>
+            </div>
             <div class="websiteName"><a class="navbar-brand" href="/">AI Authorship Classifier</a></div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -23,6 +24,7 @@
                     {% if loginStatus %}
                     <li class="nav-item"><a class="nav-link" href="/history">History</a></li>
                     {% endif %}
+                    <li class="nav-item"><a class="nav-link" href="/aboutUs">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
                     {% if not loginStatus %}
                     <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
@@ -47,6 +49,12 @@
 
     </div>
 
+    {% endif %}
+
+    {% if session.get('session_timed_out') %}
+    <script>
+        alert('Your session has timed out. Please log in again.');
+    </script>
     {% endif %}
 
     {% block content %}

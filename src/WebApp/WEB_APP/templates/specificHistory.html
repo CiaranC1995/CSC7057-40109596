@@ -2,37 +2,62 @@
 
 {% block content %}
 
-<section class="specificResultDetails">
+<section class="specificResult">
 
-    <h1>Date of Classification</h1>
-    <p>{{ specificHistoryInfo['classifier_output'][0][1] }}</p>
-    <h1>Input Text</h1>
-    <p> {{ specificHistoryInfo['classifier_output'][0][2] }}</p>
-    <h1>Average Text Perplexity</h1>
-    <p> {{ specificHistoryInfo['classifier_output'][0][4] }}</p>
-    <h1>Text Burstiness</h1>
-    <p> {{ specificHistoryInfo['classifier_output'][0][5] }}</p>
-    <h1>Classification Result</h1>
+    <div class="container">
+        <h3>Input Text</h3>
+    </div>
 
-    {% if specificHistoryInfo['classifier_output'][0][7] > 0.7 %}
-    <p>Likely Human-Written</p>
-    {% elif specificHistoryInfo['classifier_output'][0][7] < 0.7 and specificHistoryInfo['classifier_output'][0][7]> 0.5
-        %}
-        <p>AI and Human Detected</p>
-        {% else %}
-        <p>Likely AI-Generated</p>
-        {% endif %}
+    <div class="container">
+        <p>{{ specificHistoryInfo['classifier_output'][0][2] }}</p>
+    </div>
 
-        <h1>Probability of Human Authorship</h1>
-        <p> {{ specificHistoryInfo['classifier_output'][0][7] }}</p>
-        <h1>Probability of AI Authorship</h1>
-        <p> {{ specificHistoryInfo['classifier_output'][0][8] }}</p>
+    <div class="container">
+        <h3>Analysis Statistics</h3>
+    </div>
 
-        {% set ppls = specificHistoryInfo['sentence_perplexity'] %}
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date of Classification</th>
+                    <th>Average Text Perplexity</th>
+                    <th>Text Burstiness</th>
+                    <th>Probability of Human Authorship</th>
+                    <th>Probability of AI Authorship</th>
+                    <th>Classification Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ specificHistoryInfo['classifier_output'][0][1] }}</td>
+                    <td>{{ "%.3f" % specificHistoryInfo['classifier_output'][0][4] }}</td>
+                    <td>{{ "%.3f" % specificHistoryInfo['classifier_output'][0][5] }}</td>
+                    <td>{{ "%.2f" % (specificHistoryInfo['classifier_output'][0][7] * 100) }}%</td>
+                    <td>{{ "%.2f" % (specificHistoryInfo['classifier_output'][0][8] * 100) }}%</td>
+                    {% if specificHistoryInfo['classifier_output'][0][7] > 0.7 %}
+                    <td>Likely Human-Written</td>
+                    {% elif specificHistoryInfo['classifier_output'][0][7] < 0.7 and
+                        specificHistoryInfo['classifier_output'][0][7]> 0.5 %}
+                        <td>AI and Human Detected</td>
+                        {% else %}
+                        <td>Likely AI-Generated</td>
+                        {% endif %}
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    {% set ppls = specificHistoryInfo['sentence_perplexity'] %}
     {% set max_value = ppls|max %}
     {% set max_index = ppls.index(max_value) %}
 
-    <h1>Individual Sentence Perplexities</h1>
+    <div class="container">
+
+        <h3>Individual Sentence Perplexities</h3>
+
+    </div>
 
     <div class="container">
         <table class="table table-striped">
@@ -53,13 +78,26 @@
                 {% endfor %}
             </tbody>
         </table>
-    </div>
-    
-    <h1>Sentence With Highest Perplexity</h1>
-    <p>The sentence with the highest perplexity ... "{{ specificHistoryInfo['largest_ppl'][0][2] }}"
-        ... has a perplexity score of : {{ "%.3f" % specificHistoryInfo['largest_ppl'][0][3] }}</p>
 
-    
+    </div>
+
+    <div class="container">
+
+        <h3>Sentence With Highest Perplexity</h3>
+
+    </div>
+
+    <div class="container">
+
+        <p>The sentence with the highest perplexity ... <i>"{{ specificHistoryInfo['largest_ppl'][0][2] }}"</i>
+            ... has a perplexity score of : <b>{{ "%.3f" % specificHistoryInfo['largest_ppl'][0][3] }}</b></p>
+
+    </div>
+
+    <hr>
+
+    <div class="container"><a href="#"><button class="btn-danger">Delete Result</button></a></div>
+
 </section>
 
 
