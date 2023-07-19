@@ -118,15 +118,11 @@ textarea[name="userInputText"] {
   justify-content: center;
   align-items: center;
   background-color: green;
-}
-
-.loginMessage .container {
   text-align: center;
 }
 
 .loginMessage .notification {
   display: inline-block;
-  /* padding: 20px; */
   color: white;
   font-size: 24px;
 }
@@ -164,4 +160,57 @@ textarea[name="userInputText"] {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.formContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  padding-top: 20px;
+}
+
+.historyContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container-inner {
+  width: 80%; 
+}
+
+.alert {
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+.btn-outline {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.inputForm{
+  width: 70%;
+  height: 50vh;
 }

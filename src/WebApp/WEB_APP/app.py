@@ -1,4 +1,5 @@
 from flask import Flask
+from datetime import timedelta
 from routes.landing import landing_blueprint
 from routes.login import login_blueprint
 from routes.logout import logout_blueprint
@@ -10,6 +11,7 @@ from routes.specificHistory import specificHistory_blueprint
 
 app = Flask(__name__)
 app.secret_key = 'thisismysecretkey1995'
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
 
 # Web Application Blueprints
 app.register_blueprint(login_blueprint)

@@ -38,13 +38,15 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>No.</th>
                     <th>Sentence</th>
                     <th>Perplexity</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in specificHistoryInfo['sentence_perplexity'] %}
-                <tr {% if item[4] < 25 %} class="highlight" {% endif %}>
+                <tr {% if item[3] < 25 %} class="highlight" {% endif %}>
+                    <td>{{ item[1] }}</td>
                     <td>{{ item[2] }}</td>
                     <td>{{ "%.3f" % item[3] }}</td>
                 </tr>
@@ -54,7 +56,8 @@
     </div>
     
     <h1>Sentence With Highest Perplexity</h1>
-    <!-- ****************************************************************** -->
+    <p>The sentence with the highest perplexity ... "{{ specificHistoryInfo['largest_ppl'][0][2] }}"
+        ... has a perplexity score of : {{ "%.3f" % specificHistoryInfo['largest_ppl'][0][3] }}</p>
 
     
 </section>

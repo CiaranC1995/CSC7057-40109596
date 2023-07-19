@@ -31,7 +31,7 @@ def login_post_route():
             if username == user[1] or username == user[2]:
 
                 is_match = bcrypt.checkpw(password.encode("utf-8"), user[3].encode("utf-8"))
-                print(is_match)
+                
                 if is_match:
 
                     session['user'] = user
