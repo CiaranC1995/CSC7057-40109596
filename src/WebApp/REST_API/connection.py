@@ -29,3 +29,12 @@ class DatabaseConnector:
             cursor.execute(query)
         self.connection.commit()
         return cursor
+    
+    def execute_delete_query(self, query, values=None):
+        cursor = self.connection.cursor()
+        if values:
+            cursor.execute(query, values)
+        else:
+            cursor.execute(query)
+        cursor.close()  
+        return 
