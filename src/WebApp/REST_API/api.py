@@ -9,6 +9,7 @@ from routes.userResults import userResults_blueprint
 from routes.sentencePerplexityRoute import sentencePerplexityRoute_blueprint
 from routes.specificHistoryRoute import specificHistoryRoute_blueprint
 from routes.deleteSingleResultRoute import deleteSingleResultRoute_blueprint
+from routes.deleteHistoryRoute import deleteHistoryRoute_blueprint
 
 app = Flask(__name__)
 
@@ -24,6 +25,7 @@ app.register_blueprint(userResults_blueprint)
 app.register_blueprint(sentencePerplexityRoute_blueprint)
 app.register_blueprint(specificHistoryRoute_blueprint)
 app.register_blueprint(deleteSingleResultRoute_blueprint)
+app.register_blueprint(deleteHistoryRoute_blueprint)
 
 if __name__ == '__main__':
     app.run(port=8080, debug=True)
