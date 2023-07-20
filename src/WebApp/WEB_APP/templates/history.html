@@ -65,7 +65,11 @@
 
     <hr>
 
-    <div class="container"><a href="#"><button class="btn-danger">Clear History</button></a></div>
+    <div class="container">
+        <form action="/deleteHistory" method="POST">
+            <button type="submit" class="btn-danger">Clear History</button>
+        </form>
+    </div>
 
     {% endif %}
 

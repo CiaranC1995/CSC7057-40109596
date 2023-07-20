@@ -1,18 +1,18 @@
 from flask import render_template, Blueprint, session, request, redirect, url_for
 import requests
 
-deleteSingleResult_blueprint = Blueprint('deleteSingleResult', __name__)
+deleteHistory_blueprint = Blueprint('deleteHistory', __name__)
 
-@deleteSingleResult_blueprint.route('/deleteSingleResult', methods=['POST'])
-def delete_single_result():
+@deleteHistory_blueprint.route('/deleteHistory', methods=['POST'])
+def delete_history():
     if 'authen' in session:
         loginMessage = f"Logged In as '{session['user'][1]}'"
         loginStatus = True
-        classifier_output_id = request.form.get('classifier_output_id')
-        endpoint = "http://127.0.0.1:8080/deleteSingleResultRoute"
+        user_id = session['user_id']
+        endpoint = "http://127.0.0.1:8080/deleteHistoryRoute"
 
         try:
-            requests.post(endpoint, params={'classifier_output_id': classifier_output_id})
+            requests.post(endpoint, params={'user_id': user_id})
         except Exception as e: 
             return str(e)
 

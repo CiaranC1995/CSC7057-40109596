@@ -10,6 +10,7 @@ from routes.history import history_blueprint
 from routes.specificHistory import specificHistory_blueprint
 from routes.aboutUs import aboutUs_blueprint
 from routes.deleteSingleResult import deleteSingleResult_blueprint
+from routes.deleteHistory import deleteHistory_blueprint
 
 app = Flask(__name__)
 app.secret_key = 'thisismysecretkey1995'
@@ -39,6 +40,7 @@ app.register_blueprint(history_blueprint)
 app.register_blueprint(specificHistory_blueprint)
 app.register_blueprint(aboutUs_blueprint)
 app.register_blueprint(deleteSingleResult_blueprint)
+app.register_blueprint(deleteHistory_blueprint)
 
 if __name__ == '__main__':
     app.run(debug=True)
