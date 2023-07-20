@@ -20,8 +20,7 @@ def signup_route_post():
     login_status = False
 
     endpoint1 = "http://127.0.0.1:8080/getAllUserInfo"
-    headers = {'Cache-Control': 'no-cache'}
-    api_response = requests.get(endpoint1, headers=headers)
+    api_response = requests.get(endpoint1)
     user_data = api_response.json()
 
     does_user_already_exist = False

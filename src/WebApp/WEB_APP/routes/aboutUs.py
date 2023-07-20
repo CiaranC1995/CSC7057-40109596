@@ -1,5 +1,4 @@
-from flask import render_template, Blueprint, session, request
-import requests
+from flask import render_template, Blueprint, session
 
 aboutUs_blueprint = Blueprint('aboutUs', __name__)
 
