@@ -12,6 +12,10 @@
   height: auto;
 }
 
+.webIcon{
+  width: 300px;
+}
+
 .websiteName {
   flex: 1;
 }
@@ -134,7 +138,7 @@ textarea[name="userInputText"] {
 
 .warningImage {
   margin-right: 10px;
-  padding-bottom: 40px;
+  padding-top: 20px;
 }
 
 .resultHuman {
@@ -248,4 +252,8 @@ textarea[name="userInputText"] {
 
 .table th {
   text-align: center;
+}
+
+.websiteName {
+  padding-left: 20px;
 }
