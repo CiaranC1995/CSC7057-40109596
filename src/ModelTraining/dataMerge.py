@@ -1,24 +1,48 @@
+import os
 import pandas as pd
 
 
-dataset = pd.read_csv(r'C:\Users\ccase\Desktop\Dissertation\Datasets\preprocessed_dataset_noTransformation.csv')
-
-# print(dataset.head())
-
-
-# Define a function to concatenate tokens in a list into a string
-def concatenate_tokens(token_list):
-    return ' '.join(token_list)
+def read_txt_file(file_path, encoding="utf-8"):
+    with open(file_path, 'r', encoding=encoding) as file:
+        content = file.read()
+    return content
 
 
-# dataset['text_to_analyse'] = dataset['text_to_analyse'].apply(concatenate_tokens)
-dataset['text_to_analyse'] = [concatenate_tokens(record) for record in dataset['text_to_analyse']]
-print(dataset.head())
+human_directory_path = r'C:\Users\ccase\Desktop\Dissertation\Datasets\chatgpt-generated-text-corpus\full_texts\human'
+chatgpt_directory_path = r'C:\Users\ccase\Desktop\Dissertation\Datasets\chatgpt-generated-text-corpus\full_texts' \
+                         r'\chatgpt'
 
-# dataset = dataset.sample(frac=1).reset_index(drop=True)
+# HUMAN TEXT
 
-# dataset.to_csv('preprocessed_detokenized_dataset_no_transformation.csv', index=False)
+human_file_contents_list = []
+human_filename_list = []
 
-# tokens = ['herbert', 'george', 'webb', 'july', 'october', 'australian', 'mathematician', 'make', 'significant', 'contribution', 'abstract', 'algebra', 'topology', 'also', 'know', 'work', 'mathematical', 'physic', 'include', 'development', 'theory', 'black', 'hole', 'webb', 'bear', 'melbourne', 'july', 'son', 'herbert', 'webb', 'civil', 'engineer', 'attend', 'scotch', 'college', 'study', 'university', 'melbourne', 'receive', 'beginning', 'work', 'research', 'fellow', 'university', 'cambridge', 'receive', 'supervision', 'hardy', 'return', 'australia', 'webb', 'become', 'lecturer', 'university', 'melbourne', 'professor', 'serve', 'chairman', 'mathematics', 'department', 'melbourne', 'president', 'australian', 'mathematical', 'society', 'webb', 'die', 'october', 'melbourne', 'long', 'illness', 'memorial', 'service', 'hold', 'st', 'paul', 'cathedral', 'december', 'bury', 'springvale', 'cemetery']
-#
-# print(concatenate_tokens(tokens))
+for human_filename in os.listdir(human_directory_path):
+    if human_filename.endswith(".txt"):
+        file_path = os.path.join(human_directory_path, human_filename)
+        file_content = read_txt_file(file_path)
+        human_file_contents_list.append(file_content)
+        human_filename_list.append(human_filename)
+
+df_human = pd.DataFrame()
+df_human['Human_Text'] = human_file_contents_list
+
+# CHATGPT TEXT
+
+chatgpt_file_contents_list = []
+chatgpt_filename_list = []
+
+for chatgpt_filename in os.listdir(chatgpt_directory_path):
+    if chatgpt_filename.endswith(".txt"):
+        file_path = os.path.join(chatgpt_directory_path, chatgpt_filename)
+        file_content = read_txt_file(file_path)
+        chatgpt_file_contents_list.append(file_content)
+        chatgpt_filename_list.append(chatgpt_filename)
+
+df_mixed = pd.DataFrame()
+
+df_mixed['Filename'] = human_filename_list + chatgpt_filename_list
+df_mixed['text_to_analyse'] = human_file_contents_list + chatgpt_file_contents_list
+# df_mixed["AI_Generated"] = [0 for i in range(len(df_human))] + [1 for i in range(len(df_human))]
+
+df_mixed.to_csv("new_dataset_github.csv", index=False)

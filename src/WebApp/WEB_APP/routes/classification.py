@@ -11,7 +11,7 @@ def classification_route_post():
 
     input_text = request.form.get('userInputText')
 
-    classifier = TextClassifier(r'C:/Users/ccase/Desktop/CSC7057-40109596/src/ModelTraining/Models/LinearSVC_Classifier_EntireDataset_detokenized_NoTransformationOfPPL_Burst.pickle', r'C:/Users/ccase/Desktop/CSC7057-40109596/src/ModelTraining/Vectorizers/tfidfvectorizer.pickle')
+    classifier = TextClassifier(r'src\ModelTraining\Models\LinearSVC_Classifier_EntireDataset_detokenized_NoTransformationOfPPL_Burst.pickle', r'src\ModelTraining\Vectorizers\tfidfvectorizer.pickle')
     classification_result = classifier.classify_text(input_text=input_text)
 
     date_of_classification = datetime.date.today().strftime("%d/%m/%Y")
