@@ -1,46 +1,42 @@
 from flask import Flask, session
 from datetime import timedelta, datetime, timezone
-from routes.landing import landing_blueprint
-from routes.login import login_blueprint
-from routes.logout import logout_blueprint
-from routes.signup import signup_blueprint
-from routes.contact import contact_blueprint
-from routes.classification import classification_blueprint
-from routes.history import history_blueprint
-from routes.specificHistory import specificHistory_blueprint
-from routes.aboutUs import aboutUs_blueprint
-from routes.deleteSingleResult import deleteSingleResult_blueprint
-from routes.deleteHistory import deleteHistory_blueprint
+from config import MAX_SESSION_IDLE_TIME, SECRET_KEY, PERMANENT_SESSION_LIFETIME
 
+# Web Application Setup
 app = Flask(__name__)
-app.secret_key = 'thisismysecretkey1995'
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
+app.secret_key = SECRET_KEY
+app.config['PERMANENT_SESSION_LIFETIME'] = PERMANENT_SESSION_LIFETIME
 
-MAX_INACTIVE_TIME = 3600
+# List of Blueprints
+BLUEPRINTS = [
+    'login',
+    'landing',
+    'logout',
+    'signup',
+    'contact',
+    'classification',
+    'history',
+    'specificHistory',
+    'aboutUs',
+    'deleteSingleResult',
+    'deleteHistory'
+]
+
+# Register Blueprints
+for blueprint_name in BLUEPRINTS:
+    blueprint_module = __import__(f'routes.{blueprint_name}', fromlist=[''])
+    app.register_blueprint(getattr(blueprint_module, f'{blueprint_name}_blueprint'))
 
 @app.before_request
 def before_request():
     # Check if the session has expired
     last_active = session.get('last_active')
-    if last_active is not None and (datetime.now(timezone.utc) - last_active).total_seconds() > MAX_INACTIVE_TIME:
+    if last_active is not None and (datetime.now(timezone.utc) - last_active).total_seconds() > MAX_SESSION_IDLE_TIME:
         # Set a flag in the session to indicate the timeout
         session['session_timed_out'] = True
 
     # Update the last_active time in the session
     session['last_active'] = datetime.now(timezone.utc)
-
-# Web Application Blueprints
-app.register_blueprint(login_blueprint)
-app.register_blueprint(landing_blueprint)
-app.register_blueprint(logout_blueprint)
-app.register_blueprint(signup_blueprint)
-app.register_blueprint(contact_blueprint)
-app.register_blueprint(classification_blueprint)
-app.register_blueprint(history_blueprint)
-app.register_blueprint(specificHistory_blueprint)
-app.register_blueprint(aboutUs_blueprint)
-app.register_blueprint(deleteSingleResult_blueprint)
-app.register_blueprint(deleteHistory_blueprint)
 
 if __name__ == '__main__':
     app.run(debug=True)

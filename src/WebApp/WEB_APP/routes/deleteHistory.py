@@ -5,18 +5,19 @@ deleteHistory_blueprint = Blueprint('deleteHistory', __name__)
 
 @deleteHistory_blueprint.route('/deleteHistory', methods=['POST'])
 def delete_history():
-    if 'authen' in session:
-        loginMessage = f"Logged In as '{session['user'][1]}'"
-        loginStatus = True
-        user_id = session['user_id']
+    loginStatus = 'authen' in session
+    loginMessage = f"Logged In as '{session.get('user', ['', ''])[1]}'" if loginStatus else ""
+
+    if loginStatus:
+        user_id = session.get('user_id', None)
         endpoint = "http://127.0.0.1:8080/deleteHistoryRoute"
 
-        try:
-            requests.post(endpoint, params={'user_id': user_id})
-        except Exception as e: 
-            return str(e)
+        if user_id is not None:
+            try:
+                requests.post(endpoint, params={'user_id': user_id})
+            except requests.exceptions.RequestException as e: 
+                return f"An error occurred: {e}"
 
         return redirect(url_for('history.history_route', loginStatus=loginStatus, loginMessage=loginMessage))
     else:
-        loginStatus = False
         return render_template('landing.html', loginStatus=loginStatus)

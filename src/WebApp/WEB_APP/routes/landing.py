@@ -4,13 +4,7 @@ landing_blueprint = Blueprint('landing', __name__)
 
 @landing_blueprint.route('/')
 def landing_route():
-    sessionObject = session
-    loginStatus = False
+    loginStatus = 'authen' in session
+    loginMessage = f"Logged In as '{session.get('user', ['', ''])[1]}'" if loginStatus else ""
 
-    if 'authen' in sessionObject:
-        loginMessage = f"Logged In as '{sessionObject['user'][1]}'"
-        loginStatus = True
-
-        return render_template('landing.html', loginStatus=loginStatus, loginMessage=loginMessage)
-    else:
-        return render_template('landing.html', loginStatus=loginStatus)
+    return render_template('landing.html', loginStatus=loginStatus, loginMessage=loginMessage)

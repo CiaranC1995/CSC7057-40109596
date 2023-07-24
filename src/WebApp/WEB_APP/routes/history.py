@@ -1,15 +1,15 @@
-from flask import render_template, Blueprint, session, request
+from flask import render_template, Blueprint, session
 import requests
 
 history_blueprint = Blueprint('history', __name__)
 
 @history_blueprint.route('/history', methods=['GET'])
 def history_route():
-    if 'authen' in session:
-        loginMessage = f"Logged In as '{session['user'][1]}'"
-        loginStatus = True
+    loginStatus = 'authen' in session
+    loginMessage = f"Logged In as '{session.get('user', ['', ''])[1]}'" if loginStatus else ""
 
-        user_id = session['user_id']
+    if loginStatus:
+        user_id = session.get('user_id')
         endpoint = 'http://127.0.0.1:8080/userResults'
         
         try:
@@ -20,10 +20,9 @@ def history_route():
                 empty_message = "No previous classification data available."
                 return render_template('history.html', loginStatus=loginStatus, loginMessage=loginMessage, empty_message=empty_message)
 
-        except Exception as e:
-            return str(e)
+        except requests.exceptions.RequestException as e:
+            return f"An error occurred: {e}"
 
         return render_template('history.html', loginStatus=loginStatus, loginMessage=loginMessage, history_info=history_info)
     else:
-        loginStatus = False
         return render_template('landing.html', loginStatus=loginStatus)
