@@ -1,5 +1,5 @@
 from flask import Flask, session
-from datetime import timedelta, datetime, timezone
+from datetime import datetime, timezone
 from config import MAX_SESSION_IDLE_TIME, SECRET_KEY, PERMANENT_SESSION_LIFETIME
 
 # Web Application Setup

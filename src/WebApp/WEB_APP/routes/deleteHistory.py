@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, session, request, redirect, url_for
+from flask import render_template, Blueprint, session, redirect, url_for
 import requests
 
 deleteHistory_blueprint = Blueprint('deleteHistory', __name__)
