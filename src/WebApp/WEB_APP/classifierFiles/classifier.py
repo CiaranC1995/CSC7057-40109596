@@ -51,6 +51,11 @@ class TextClassifier:
         perplexity_value = results['avg_text_ppl']
         burstiness_value = results["text_burstiness"]
 
+        if np.isnan(perplexity_value) or np.isnan(burstiness_value):
+            return {
+                'error_message': 'Error. Classification Unsuccessful. Please try again.'
+            }
+
         vectorized_text = self.vectorizer.transform([preprocessed_text])
         text_array = vectorized_text.toarray()
         ppl_array = np.array(perplexity_value).reshape(-1, 1)

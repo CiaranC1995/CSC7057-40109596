@@ -7,10 +7,18 @@ classification_blueprint = Blueprint('classification', __name__)
 
 @classification_blueprint.route('/classification', methods=["POST"])
 def classification_route_post():
+
+    loginStatus = 'authen' in session
+    user_id = session.get('user_id', -1)
+    loginMessage = f"Logged In as '{session.get('user', ['', ''])[1]}'" if loginStatus else ""
+
     input_text = request.form.get('userInputText')
 
-    classifier = TextClassifier(r'src\ModelTraining\Models\LinearSVC_Classifier_EntireDataset_detokenized_NoTransformationOfPPL_Burst.pickle', r'src\ModelTraining\Vectorizers\tfidfvectorizer.pickle')
+    classifier = TextClassifier(r'src\ModelTraining\Models\LinearSVC_Classifier_main.pickle', r'src\ModelTraining\Vectorizers\tfidfvectorizer.pickle')
     classification_result = classifier.classify_text(input_text=input_text)
+
+    if 'error_message' in classification_result:
+        return render_template('error.html', error_message=classification_result['error_message'], loginMessage=loginMessage, loginStatus=loginStatus)
 
     date_of_classification = datetime.date.today().strftime("%d/%m/%Y")
     processed_input_text = classification_result['processed_input_text']
@@ -22,10 +30,6 @@ def classification_route_post():
 
     # Join two lists for ease of processing
     sentences_perplexities = list(zip(classification_result['sentences'], classification_result['sentence_perplexities']))
-
-    loginStatus = 'authen' in session
-    user_id = session.get('user_id', -1)
-    loginMessage = f"Logged In as '{session.get('user', ['', ''])[1]}'" if loginStatus else ""
 
     endPoint = 'http://127.0.0.1:8080/classificationRoute'
 
