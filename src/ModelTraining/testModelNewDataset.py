@@ -11,7 +11,7 @@ from nltk.corpus import stopwords
 from nltk.corpus import wordnet as wn
 
 model_path = r'C:\Users\ccase\Desktop\CSC7057-40109596\src\ModelTraining\Models' \
-             r'\LinearSVC_Classifier_EntireDataset_detokenized_NoTransformationOfPPL_Burst.pickle'
+             r'\LinearSVC_CV.pickle'
 
 test_data = r'C:\Users\ccase\Desktop\Dissertation\Datasets\chatgpt-generated-text-corpus' \
             r'\NEW_DATASET_perplexity_burstiness_scores.csv'
