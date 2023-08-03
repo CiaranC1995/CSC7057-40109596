@@ -76,6 +76,7 @@ batch_size = 5000
 num_samples = final_x_train.shape[0]
 num_batches = (num_samples + batch_size - 1) // batch_size
 
+# 10 fold
 grid_search = GridSearchCV(svm_model, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
 
 for batch_idx in range(num_batches):
