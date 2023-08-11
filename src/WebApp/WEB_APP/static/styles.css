@@ -257,13 +257,14 @@ textarea[name="userInputText"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 550px;
+  padding-right: 550px;
 }
 
 .aboutUsContainer {
   margin: 10px;
   color: #3E2C1C;
+  text-align: center;
 }
 
 .table td,
