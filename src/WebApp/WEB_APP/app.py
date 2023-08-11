@@ -19,7 +19,8 @@ BLUEPRINTS = [
     'specificHistory',
     'aboutUs',
     'deleteSingleResult',
-    'deleteHistory'
+    'deleteHistory',
+    'downloadPDF'
 ]
 
 # Register Blueprints

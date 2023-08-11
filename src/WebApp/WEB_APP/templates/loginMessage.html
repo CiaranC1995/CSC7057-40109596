@@ -2,27 +2,33 @@
 
 {% block content %}
 
-<section class="container">
+<section class="container-message">
 
-    <div class="container-inner">
+    {% if not loginStatus %}
 
-        {% if not loginStatus %}
-
-        <div class="alert alert-danger">
-            <h1>Credentials Not Recognized... Please Try Again...</h1>
-        </div>
-
-        <div><a class="btn btn-primary btn-outline" href="javascript:history.back()">Go back</a></div>
-
-        {% else %}
-
-        <div class="alert alert-success">
-            <h1>Congratulations! You have successfully logged in.</h1>
-        </div>
-
-        {% endif %}
-
+    <div class="alert alert-success">
+        <h2>Credentials Not Recognized... Please Try Again...</h2>
     </div>
+
+    <div><a class="btn btn-dark" href="javascript:history.back()">Go back</a></div>
+
+    {% else %}
+
+    <div class="alert alert-success">
+        <h2>Login Successful!</h2>
+    </div>
+
+    <div class="buttons">
+        <a class="btn btn-dark" href="/">Analyse</a>
+        <a class="btn btn-dark" href="/history">History</a>
+        <a class="btn btn-dark" href="/aboutUs">About</a>
+        <a class="btn btn-dark" href="/contact">Contact</a>
+        <a class="btn btn-dark" href="/logout">Logout</a>
+    </div>
+
+
+    {% endif %}
+
 
 </section>
 

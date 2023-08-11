@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="container-message">
+
+    <div class="alert alert-success">
+        <h3>Download Successful!</h3>
+    </div>
+
+    <div><a class="btn btn-dark" href="javascript:history.back()">Go back</a></div>
+
+    <br>
+
+    <div class="buttons">
+        <a class="btn btn-dark" href="/">Analyse</a>
+        <a class="btn btn-dark" href="/history">History</a>
+        <a class="btn btn-dark" href="/aboutUs">About</a>
+        <a class="btn btn-dark" href="/contact">Contact</a>
+        <a class="btn btn-dark" href="/logout">Logout</a>
+    </div>
+
+</section>
+
+{% endblock %}

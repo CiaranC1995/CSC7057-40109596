@@ -2,20 +2,18 @@
 
 {% block content %}
 
-<section class="container">
+<section class="container contactMessage">
     {% if isContactMessageCreated %}
     <div class="alert alert-success">
-        <button class="close" data-dismiss="alert" aria-label="Close"></button>
-        Thanks for your feedback! A member of our team will respond to your message as soon as possible!
+        <h3>Thanks for your feedback! A member of our team will respond to your message as soon as possible!</h3>
     </div>
     <br>
-    <div><a class="btn btn-primary btn-outline" href="javascript:history.back()">Go back</a></div>
+    <div><a class="btn btn-dark" href="javascript:history.back()">Go back</a></div>
     {% else %}
     <div class="alert alert-danger">
-        <button class="close" data-dismiss="alert" aria-label="Close"></button>
-        Oh no, we didn't seem to get your message. Please try again!
+        <h3>Oh no, we didn't seem to get your message. Please try again!</h3>
     </div>
-    <div><a class="btn btn-primary btn-outline" href="javascript:history.back()">Go back</a></div>
+    <div><a class="btn btn-dark" href="javascript:history.back()">Go back</a></div>
     {% endif %}
 </section>
 

@@ -4,6 +4,10 @@
 
 <section class="userHistory">
 
+    <div class="userHistoryName">
+        <button class="btn btn-dark disabled">{{ user_name[1] }}'s History</button>
+    </div>
+
     {% if empty_message %}
 
     <div class="emptyMessage">
@@ -47,15 +51,17 @@
                     <td>{{ "%.3f" % record[5] }}</td>
                     <td>{{ "%.2f" % (record[7] * 100) }}%</td>
                     <td>{{ "%.2f" % (record[8] * 100) }}%</td>
-                    {% if record[7] > 0.7 %}
-                    <td>Likely Human-Written</td>
-                    {% elif record[7] < 0.7 and record[7]> 0.5 %}
-                        <td>AI and Human Detected</td>
-                        {% else %}
-                        <td>Likely AI-Generated</td>
-                        {% endif %}
-                        <td><a href="/specificHistory?classifier_output_id={{ record[0] }}"><button type="button"
-                                    class="btn btn-dark">Details</button></a></td>
+                    {% if record[6] == 0 and record[7] > 0.5934493748932971 %}
+                    <td>Human-Written</td>
+                    {% elif record[6] == 0 and record[7] < 0.5934493748932971 %} <td>Possibly Human-Written</td>
+                        {% elif record[6] == 1 and record[7] > 0.5937469307986889 %}
+                        <td>AI-Generated</td>
+                        {% elif record[6] == 1 and record[7] < 0.5937469307986889 %} <td>Possibly AI-Generated</td>
+                            {% else %}
+                            <td>Not Classified</td>
+                            {% endif %}
+                            <td><a href="/specificHistory?classifier_output_id={{ record[0] }}"><button type="button"
+                                        class="btn btn-dark">Details</button></a></td>
                 </tr>
                 {% endfor %}
             </tbody>

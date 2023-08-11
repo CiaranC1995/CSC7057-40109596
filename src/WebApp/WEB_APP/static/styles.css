@@ -12,7 +12,7 @@
   height: auto;
 }
 
-.webIcon{
+.webIcon {
   width: 300px;
 }
 
@@ -26,6 +26,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: #3E2C1C;
+  padding-bottom: 100px;
 }
 
 .limitationsSection {
@@ -112,6 +114,7 @@ textarea[name="userInputText"] {
   display: block;
   text-align: center;
   margin-top: 1px;
+  color: #3E2C1C;
 }
 
 .form-label {
@@ -135,20 +138,11 @@ textarea[name="userInputText"] {
 .warningImage {
   margin-right: 10px;
   padding-top: 20px;
+  padding-left: 265px;
 }
 
-.resultHuman {
-  color: green;
-}
-
-.resultAI {
-  color: red;
-}
-
-.mixedResult,
-.humanResult,
-.aiResult {
-  font-size: 240%;
+.listLimits {
+  width: 600px;
 }
 
 .highlight {
@@ -168,14 +162,31 @@ textarea[name="userInputText"] {
   flex-direction: column;
   align-items: center;
   padding-top: 10px;
+  color: #3E2C1C;
 }
 
 .formContainer {
+  color: #3E2C1C;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 50vh;
-  padding-top: 20px;
+  padding-top: 75px;
+}
+
+.formContainerContact {
+  color: #3E2C1C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+
+.title {
+  text-align: center;
+  padding-bottom: 30px;
 }
 
 .historyContainer {
@@ -183,6 +194,7 @@ textarea[name="userInputText"] {
   justify-content: center;
   align-items: center;
   padding: 20px;
+  color: #3E2C1C;
 }
 
 .emptyMessage {
@@ -190,18 +202,26 @@ textarea[name="userInputText"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 50vh;
+  color: #3E2C1C;
+  font-weight: bold;
 }
 
 .emptyMessageContainer {
   margin: 10px;
+  color: #3E2C1C;
 }
 
-.container-inner {
-  width: 80%;
+.container-message {
+  padding-top: 250px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: #3E2C1C;
 }
 
 .alert {
+  padding-top: 200px;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -213,8 +233,12 @@ textarea[name="userInputText"] {
 }
 
 .alert-success {
-  background-color: #d4edda;
-  border: 1px solid #c3e6cb;
+  height: auto;
+  width: auto;
+  text-align: center;
+  color: #FAD6A5;
+  background-color: #3E2C1C;
+  border: 1px solid #3E2C1C;
 }
 
 .btn-outline {
@@ -224,7 +248,7 @@ textarea[name="userInputText"] {
 }
 
 .inputForm {
-  width: 70%;
+  width: 20%;
   height: 50vh;
 }
 
@@ -239,12 +263,107 @@ textarea[name="userInputText"] {
 
 .aboutUsContainer {
   margin: 10px;
+  color: #3E2C1C;
 }
 
-.table td {
+.table td,
+th {
+  text-align: center;
+  color: #3E2C1C;
+}
+
+#loadingContainer {
+  color: #3E2C1C;
+  font-weight: bold;
+}
+
+body {
+  background-color: #FAD6A5;
+}
+
+.navbar-light {
+  background-color: #3E2C1C !important;
+}
+
+.navbar-nav .nav-link {
+  color: #FAD6A5 !important;
+  font-weight: bold;
+}
+
+#limitations {
+  color: #3E2C1C !important;
+}
+
+.lead {
   text-align: center;
 }
 
-.table th {
-  text-align: center;
+.btn-dark {
+  background-color: #3E2C1C !important;
+  color: #FAD6A5 !important;
+  font-weight: bold;
+}
+
+.specificResult {
+  color: #3E2C1C;
+}
+
+.container-delete {
+  padding-bottom: 200px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: #3E2C1C;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 10vh;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background-color: #3E2C1C !important;
+  padding-top: 0;
+}
+
+.socials {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 10px !important;
+}
+
+.webIconSocials {
+  max-width: 60px;
+  height: 40px;
+  margin-right: 20px;
+}
+
+.resultsContainerBottom {
+  padding-bottom: 100px;
+}
+
+.contactMessage{
+  margin-top: 100px;
+}
+
+.userHistoryName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.userHistory {
+  padding-top: 50px;
+  min-height: 170vh;
+}
+
+.userHistoryName button.disabled {
+  cursor: not-allowed;
+  opacity: 1;
+  pointer-events: none;
 }

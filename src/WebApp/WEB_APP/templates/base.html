@@ -14,7 +14,8 @@
 
         <div class="container-fluid">
 
-            <div><a href="/"><img src="{{ url_for('static', filename='botOrNotLogo.png') }}" alt="Logo" class="webIcon"></a>
+            <div><a href="/"><img src="{{ url_for('static', filename='bot-colour-10.png') }}" alt="Logo"
+                        class="webIcon"></a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -36,20 +37,6 @@
         </div>
     </nav>
 
-    {% if loginStatus %}
-
-    <div class="loginMessage">
-
-        <div>
-            <div class="notification is-success is-small">
-                {{ loginMessage }}
-            </div>
-        </div>
-
-    </div>
-
-    {% endif %}
-
     {% if session.get('session_timed_out') %}
     <script>
         alert('Your session has timed out. Please log in again.');
@@ -58,6 +45,32 @@
 
     {% block content %}
     {% endblock %}
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light footer">
+        <div class="container">
+            <div class="socialContain" id="bs-example-navbar-collapse-1">
+                <ul class="socials">
+                    <div>
+                        <a href="https://github.com/CiaranC1995" target="_blank">
+                            <img src="{{ url_for('static', filename='social2.png') }}" alt="Logo" class="webIconSocials">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="https://www.linkedin.com/in/ciar%C3%A1n-casey-70433019b/" target="_blank">
+                            <img src="{{ url_for('static', filename='social1.png') }}" alt="Logo" class="webIconSocials">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="mailto:ccasey10@qub.ac.uk">
+                            <img src="{{ url_for('static', filename='social3.png') }}" alt="Logo" class="webIconSocials">
+                        </a>
+                    </div>
+                
+                </ul>
+            </div>
+        </div>
+    </nav>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 

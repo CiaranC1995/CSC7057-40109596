@@ -35,13 +35,20 @@
                     <td>{{ "%.3f" % specificHistoryInfo['classifier_output'][0][5] }}</td>
                     <td>{{ "%.2f" % (specificHistoryInfo['classifier_output'][0][7] * 100) }}%</td>
                     <td>{{ "%.2f" % (specificHistoryInfo['classifier_output'][0][8] * 100) }}%</td>
-                    {% if specificHistoryInfo['classifier_output'][0][7] > 0.7 %}
-                    <td>Likely Human-Written</td>
-                    {% elif specificHistoryInfo['classifier_output'][0][7] < 0.7 and
-                        specificHistoryInfo['classifier_output'][0][7]> 0.5 %}
-                        <td>AI and Human Detected</td>
+                    {% if specificHistoryInfo['classifier_output'][0][6] == 0 and
+                    specificHistoryInfo['classifier_output'][0][7] > 0.5934493748932971 %}
+                    <td>Human-Written</td>
+                    {% elif specificHistoryInfo['classifier_output'][0][6] == 0 and
+                    specificHistoryInfo['classifier_output'][0][7] < 0.5934493748932971 %} <td>Possibly Human-Written
+                        </td>
+                        {% elif specificHistoryInfo['classifier_output'][0][6] == 1 and
+                        specificHistoryInfo['classifier_output'][0][7] > 0.5937469307986889 %}
+                        <td>AI-Generated</td>
+                        {% elif specificHistoryInfo['classifier_output'][0][6] == 1 and
+                        specificHistoryInfo['classifier_output'][0][7] < 0.5937469307986889 %}
+                        <td>Possibly AI-Generated</td>
                         {% else %}
-                        <td>Likely AI-Generated</td>
+                        <td>Not Classified</td>
                         {% endif %}
                 </tr>
             </tbody>
@@ -95,13 +102,23 @@
     </div>
 
     <hr>
-    
-    <div class="container">
+
+    <div class="container-delete">
+
+        <form action="/downloadPDF" method="post">
+            <input type="hidden" name="classifier_output_id"
+                value="{{ specificHistoryInfo['classifier_output'][0][0] }}">
+            <button type="submit" class="btn btn-dark">Download PDF</button>
+        </form>
+
+        <br>
+
         <form action="/deleteSingleResult" method="post">
             <input type="hidden" name="classifier_output_id"
                 value="{{ specificHistoryInfo['classifier_output'][0][0] }}">
             <button type="submit" class="btn-danger">Delete Result</button>
         </form>
+
     </div>
 
 </section>

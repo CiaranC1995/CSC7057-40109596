@@ -18,11 +18,11 @@ def history_route():
 
             if not history_info:
                 empty_message = "No previous classification data available."
-                return render_template('history.html', loginStatus=loginStatus, loginMessage=loginMessage, empty_message=empty_message)
+                return render_template('history.html', loginStatus=loginStatus, loginMessage=loginMessage, empty_message=empty_message, user_name=session['user'])
 
         except requests.exceptions.RequestException as e:
             return f"An error occurred: {e}"
 
-        return render_template('history.html', loginStatus=loginStatus, loginMessage=loginMessage, history_info=history_info)
+        return render_template('history.html', loginStatus=loginStatus, loginMessage=loginMessage, history_info=history_info, user_name=session['user'])
     else:
         return render_template('landing.html', loginStatus=loginStatus)
