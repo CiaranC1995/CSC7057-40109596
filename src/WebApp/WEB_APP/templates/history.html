@@ -51,12 +51,12 @@
                     <td>{{ "%.3f" % record[5] }}</td>
                     <td>{{ "%.2f" % (record[7] * 100) }}%</td>
                     <td>{{ "%.2f" % (record[8] * 100) }}%</td>
-                    {% if record[6] == 0 and record[7] > 0.5934493748932971 %}
+                    {% if record[6] == 0 and record[7] > 0.5534 %}
                     <td>Human-Written</td>
-                    {% elif record[6] == 0 and record[7] < 0.5934493748932971 %} <td>Possibly Human-Written</td>
-                        {% elif record[6] == 1 and record[7] > 0.5937469307986889 %}
+                    {% elif record[6] == 0 and record[7] < 0.5534 %} <td>Not Classifiable</td>
+                        {% elif record[6] == 1 and record[7] > 0.5534 %}
                         <td>AI-Generated</td>
-                        {% elif record[6] == 1 and record[7] < 0.5937469307986889 %} <td>Possibly AI-Generated</td>
+                        {% elif record[6] == 1 and record[7] < 0.5534 %} <td>Not Classifiable</td>
                             {% else %}
                             <td>Not Classified</td>
                             {% endif %}

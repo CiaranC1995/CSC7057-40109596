@@ -36,20 +36,19 @@
                     <td>{{ "%.2f" % (specificHistoryInfo['classifier_output'][0][7] * 100) }}%</td>
                     <td>{{ "%.2f" % (specificHistoryInfo['classifier_output'][0][8] * 100) }}%</td>
                     {% if specificHistoryInfo['classifier_output'][0][6] == 0 and
-                    specificHistoryInfo['classifier_output'][0][7] > 0.5934493748932971 %}
+                    specificHistoryInfo['classifier_output'][0][7] > 0.5534 %}
                     <td>Human-Written</td>
                     {% elif specificHistoryInfo['classifier_output'][0][6] == 0 and
-                    specificHistoryInfo['classifier_output'][0][7] < 0.5934493748932971 %} <td>Possibly Human-Written
+                    specificHistoryInfo['classifier_output'][0][7] < 0.5534 %} <td>Not Classifiable
                         </td>
                         {% elif specificHistoryInfo['classifier_output'][0][6] == 1 and
-                        specificHistoryInfo['classifier_output'][0][7] > 0.5937469307986889 %}
+                        specificHistoryInfo['classifier_output'][0][7] > 0.5534 %}
                         <td>AI-Generated</td>
                         {% elif specificHistoryInfo['classifier_output'][0][6] == 1 and
-                        specificHistoryInfo['classifier_output'][0][7] < 0.5937469307986889 %}
-                        <td>Possibly AI-Generated</td>
-                        {% else %}
-                        <td>Not Classified</td>
-                        {% endif %}
+                        specificHistoryInfo['classifier_output'][0][7] < 0.5534 %} <td>Not Classifiable</td>
+                            {% else %}
+                            <td>Not Classified</td>
+                            {% endif %}
                 </tr>
             </tbody>
         </table>
