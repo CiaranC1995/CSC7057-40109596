@@ -19,6 +19,10 @@ To run this project on a local machine, ensure that the following folders and fi
 
 It is also assumed that Visual Studio Code, MAMP or XAMPP, and all the dependencies listed in the requirements.txt are installed on the local machine.
 
+Use the following line of code in a terminal that has the directoy containing requirement.txt to install dependencies:
+
+pip install -r requirements.txt
+
 To enable the Rest API to connect to the database, it needs to use MySQL port 3306. When running it locally on a Windows machine, MAMP is preferred over XAMPP, which caused issues for me during development. 
 
 Once both folders are opened in separate windows in Visual Studio Code, and the database file has been added to the local phpMyAdmin server connected using MAMP, the web application is ready to run. 
