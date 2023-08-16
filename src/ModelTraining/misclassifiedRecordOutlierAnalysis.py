@@ -3,24 +3,24 @@ import matplotlib.pyplot as plt
 
 dataset = pd.read_csv(
     r"C:\Users\ccase\Desktop\Dissertation\Documents\Data Visualisation\NEW "
-    r"PERFORMANCE\80_train_same_80_val_no_boot\Stats\Misclassified\cross_validated_misclassified_records.csv")
+    r"PERFORMANCE\80_train_same_80_val_no_boot\cross_validated_correctly_classified_records.csv")
 
 # title = 'All Misclassified Records'
-title = 'Records Misclassified as AI Generated'
-# title = 'Records Misclassified as Human Written'
+# title = 'Records Correctly Classified as AI Generated'
+title = 'Records Correctly Classified as Human Written'
 
-variable_title = 'Perplexity'
-csv_variable_name = 'perplexity'
+variable_title = 'Burstiness'
+csv_variable_name = 'burstiness'
 
 no_filter_dataframe = dataset
 ai_pred_filtered_dataframe = dataset[dataset['predicted_label'] == 1]
 human_pred_filtered_dataframe = dataset[dataset['predicted_label'] == 0]
 
-column_data_unfiltered = ai_pred_filtered_dataframe[csv_variable_name]
+column_data_unfiltered = human_pred_filtered_dataframe[csv_variable_name]
 
 # print('Total Number of Records Misclassified : ', len(dataset))
-print(f'Number of {title} : {len(ai_pred_filtered_dataframe)}')
-# print(f'Number of {title} : {len(human_pred_filtered_dataframe)}')
+# print(f'Number of {title} : {len(ai_pred_filtered_dataframe)}')
+print(f'Number of {title} : {len(human_pred_filtered_dataframe)}')
 print()
 
 mean = column_data_unfiltered.mean()
@@ -57,10 +57,10 @@ print(f'Normal Upper Data Range (q3 + (1.5 * mean)) : {normal_upper_data_range}'
 print(f'Normal Lower Data Range (q1 - (1.5 * mean)) : {normal_lower_data_range}')
 print()
 
-dataframe_no_outliers = ai_pred_filtered_dataframe[(ai_pred_filtered_dataframe[csv_variable_name] >= normal_lower_data_range) & (ai_pred_filtered_dataframe[csv_variable_name] <= normal_upper_data_range)]
+dataframe_no_outliers = human_pred_filtered_dataframe[(human_pred_filtered_dataframe[csv_variable_name] >= normal_lower_data_range) & (human_pred_filtered_dataframe[csv_variable_name] <= normal_upper_data_range)]
 
-num_points_above_upper_limit = len(ai_pred_filtered_dataframe[ai_pred_filtered_dataframe[csv_variable_name] > normal_upper_data_range])
-num_points_below_lower_limit = len(ai_pred_filtered_dataframe[ai_pred_filtered_dataframe[csv_variable_name] < normal_lower_data_range])
+num_points_above_upper_limit = len(human_pred_filtered_dataframe[human_pred_filtered_dataframe[csv_variable_name] > normal_upper_data_range])
+num_points_below_lower_limit = len(human_pred_filtered_dataframe[human_pred_filtered_dataframe[csv_variable_name] < normal_lower_data_range])
 
 print(f'Number of Outliers above Upper Data Range : {num_points_above_upper_limit}')
 print(f'Number of Outliers below Lower Data Range : {num_points_below_lower_limit}')
@@ -97,6 +97,7 @@ print()
 print(f'Stats For Data with Outliers Removed')
 print()
 column_data_no_outliers = dataframe_no_outliers[csv_variable_name]
+column_data_no_outliers.to_csv('outliersRemoved.csv', index=False)
 
 mean_no_outlier = column_data_no_outliers.mean()
 maximum_no_outlier = max(column_data_no_outliers)
