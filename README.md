@@ -27,6 +27,6 @@ To enable the Rest API to connect to the database, it needs to use MySQL port 33
 
 Once both folders are opened in separate windows in Visual Studio Code, and the database file has been added to the local phpMyAdmin server connected using MAMP, the web application is ready to run. 
 
-To connect them to their relevant ports and allow the servers to begin listening, open and run the app.py and api.py scripts in the CSC7057-40109596/src/WebApp/WEB_APP and CSC7057-40109596/src/WebApp/REST_API subdirectories respectively. 
+To connect them to their relevant ports and allow the servers to begin listening, open and run the app.py and api.py scripts in the CSC7057-40109596/src/WebApp/WEB_APP and CSC7057-40109596/src/WebApp/REST_API subdirectories respectively. This may take a couple of minutes to complete depending on the machine.
 
 Messages confirming that the servers are running will be displayed through the console in each window. The user can now open a browser and navigate to "http://127.0.0.1:5000" to access the project user interface. The home page is the first page displayed to the user. To explore the site's features, use the navigation bar at the top of the screen.
