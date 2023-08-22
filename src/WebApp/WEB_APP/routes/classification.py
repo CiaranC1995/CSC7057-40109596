@@ -14,7 +14,7 @@ def classification_route_post():
 
     input_text = request.form.get('userInputText')
 
-    classifier = TextClassifier(r'src\ModelTraining\Models\LinearSVC_CV.pickle', r'src\ModelTraining\Vectorizers\tfidfvectorizer.pickle')
+    classifier = TextClassifier(r'src\ModelTraining\Models\LinearSVC_CV_80percentDataset.pickle', r'src\ModelTraining\Vectorizers\tfidfvectorizer.pickle')
     classification_result = classifier.classify_text(input_text=input_text)
 
     if 'error_message' in classification_result:

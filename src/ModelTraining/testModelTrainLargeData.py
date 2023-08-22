@@ -14,7 +14,7 @@ start_time = time.time()
 
 # Read in dataset from csv file
 dataset = pd.read_csv(
-    r"C:\Users\ccase\Desktop\Dissertation\Datasets\GPT-wiki-intro\detokenized_preprocessed_dataset_noTransformation.csv")
+    r"C:\Users\ccase\Desktop\Dissertation\Datasets\GPT-wiki-intro\80percent_of_original_dataset.csv")
 
 print(f'Dataset Read @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
 
@@ -49,15 +49,6 @@ final_x_test = np.hstack((X_test_text_vectorized.toarray(), np.array(X_test_perp
 
 print(f'Final Train and Test Data Complete @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
 
-# # SVM
-# svm_model = LinearSVC(loss='squared_hinge', max_iter=10000, dual=False)
-# svm_model.fit(final_x_train, y_train)
-#
-# print(f'Model Fit Complete @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
-#
-# y_pred_svm = svm_model.predict(final_x_test)
-# pred_probabilities = svm_model._predict_proba_lr(final_x_test)
-
 # SVM
 svm_model = LinearSVC()
 
@@ -66,8 +57,8 @@ param_grid = {
     'loss': ['squared_hinge'],
     'max_iter': [10000, 20000],
     'dual': [False],
-    'C': [0.1, 1.0, 10.0],  # Regularization parameter (smaller values indicate stronger regularization)
-    'penalty': ['l1', 'l2'],  # Regularization type
+    'C': [0.1, 1.0, 10.0],
+    'penalty': ['l1', 'l2'],
 }
 
 batch_size = 5000
@@ -171,8 +162,8 @@ for index in correctly_classified_indices:
 correctly_classified_df = pd.DataFrame(correctly_classified_data)
 
 # Save records to a CSV file
-csv_output_file = r"C:\Users\ccase\Desktop\Dissertation\cross_validated_correctly_classified_records.csv"
-correctly_classified_df.to_csv(csv_output_file, index=False)
+# csv_output_file = r"C:\Users\ccase\Desktop\Dissertation\cross_validated_correctly_classified_records.csv"
+# correctly_classified_df.to_csv(csv_output_file, index=False)
 
 print(f'Model Test Data Predictions Complete @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
 

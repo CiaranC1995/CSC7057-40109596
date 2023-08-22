@@ -55,6 +55,7 @@ final_x_train = np.hstack((X_train_text_vectorized.toarray(), np.array(X_train_p
 final_x_test = np.hstack((X_test_text_vectorized.toarray(), np.array(X_test_perplexity).reshape(-1, 1),
                           np.array(X_test_burstiness).reshape(-1, 1)))
 
+print(type(final_x_train))
 # Bootstrapping for 1000 iterations
 batch_size = 5000
 num_iterations = 1000
