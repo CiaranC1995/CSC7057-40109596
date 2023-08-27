@@ -10,15 +10,19 @@ from nltk import word_tokenize
 from nltk.corpus import stopwords
 from nltk.corpus import wordnet as wn
 
+# Previously trained model
 model_path = r'C:\Users\ccase\Desktop\CSC7057-40109596\src\ModelTraining\Models' \
              r'\LinearSVC_CV.pickle'
 
+# New GitHub dataset for model validation
 test_data = r'C:\Users\ccase\Desktop\Dissertation\Datasets\chatgpt-generated-text-corpus' \
             r'\NEW_DATASET_perplexity_burstiness_scores.csv'
 
+# Previously trained vectorizer
 vectorizer_path = r'./Vectorizers/tfidfvectorizer.pickle'
 
 
+# Function for preprocessing textual columns in new GitHub dataset
 def process_entry(entry):
     """Lemmatize entry and remove stopwords"""
     word_lemmatizer = WordNetLemmatizer()
@@ -63,15 +67,18 @@ dataset = dataset[['text_final', 'perplexity', 'burstiness', 'AI_Generated']]
 
 new_text = dataset['text_final'].to_list()
 new_text_vectorized = vectorizer.transform(new_text)
-
 new_ppl = dataset['perplexity'].to_list()
 new_burstiness = dataset['burstiness'].to_list()
+
+# Model input
 new_x = np.hstack((new_text_vectorized.toarray(), np.array(new_ppl).reshape(-1, 1), np.array(new_burstiness).reshape(-1, 1)))
 
+# Model predictions
 new_labels_pred = classifier.predict(new_x)
 
 new_labels_true = dataset['AI_Generated'].to_list()
 
+# Calculating predictive performance metrics
 svm_accuracy = accuracy_score(new_labels_true, new_labels_pred)
 svm_precision = precision_score(new_labels_true, new_labels_pred)
 svm_recall = recall_score(new_labels_true, new_labels_pred)

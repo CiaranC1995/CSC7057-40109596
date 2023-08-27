@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score, precision_score, recall_score, \
     f1_score, roc_auc_score, roc_curve, auc
-from sklearn.model_selection import train_test_split, cross_validate, GridSearchCV, cross_val_score
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 from sklearn.svm import LinearSVC
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -14,7 +14,7 @@ start_time = time.time()
 
 # Read in dataset from csv file
 dataset = pd.read_csv(
-    r"C:\Users\ccase\Desktop\Dissertation\Datasets\GPT-wiki-intro\detokenized_preprocessed_dataset_noTransformation.csv")
+    r"C:\Users\ccase\Desktop\Dissertation\Datasets\GPT-wiki-intro\80percent_of_original_dataset.csv")
 
 print(f'Dataset Read @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
 
@@ -23,6 +23,7 @@ final_ppl = dataset['perplexity'].to_list()
 final_burstiness = dataset['burstiness'].to_list()
 final_labels = dataset['AI Generated'].to_list()
 
+# 80% Train / 20% Test split
 X_train_text, X_test_text, X_train_perplexity, X_test_perplexity, X_train_burstiness, X_test_burstiness, y_train, y_test = train_test_split(
     final_text, final_ppl, final_burstiness, final_labels, test_size=0.2, random_state=42
 )
@@ -37,28 +38,31 @@ vectorizer.fit(dataset['text_to_analyse'])
 X_train_text_vectorized = vectorizer.transform(X_train_text)
 X_test_text_vectorized = vectorizer.transform(X_test_text)
 
-# vectorizer_path = r'./Vectorizers/tfidfvectorizer.pickle'
-#
-# with open(vectorizer_path, "wb") as file:
-#     pickle.dump(vectorizer, file)
+# Save the vectorizer for future use
+vectorizer_path = r'./Vectorizers/tfidfvectorizer.pickle'
+
+with open(vectorizer_path, "wb") as file:
+    pickle.dump(vectorizer, file)
 
 print(f'Vocabulary Fit Complete @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
 
+# Creating model input arrays
 final_x_train = np.hstack((X_train_text_vectorized.toarray(), np.array(X_train_perplexity).reshape(-1, 1), np.array(X_train_burstiness).reshape(-1, 1)))
 final_x_test = np.hstack((X_test_text_vectorized.toarray(), np.array(X_test_perplexity).reshape(-1, 1), np.array(X_test_burstiness).reshape(-1, 1)))
 
 print(f'Final Train and Test Data Complete @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
 
-# SVM
+# SVM Model Implementation
 svm_model = LinearSVC(loss='squared_hinge', max_iter=10000, dual=False)
 svm_model.fit(final_x_train, y_train)
 
 print(f'Model Fit Complete @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
 
+# Model Predictions on Validation Records
 y_pred_svm = svm_model.predict(final_x_test)
 pred_probabilities = svm_model._predict_proba_lr(final_x_test)
 
-# Find misclassified indices
+# Find misclassified record indices
 misclassified_indices = np.where(y_test != y_pred_svm)[0]
 
 # Collect misclassified records and their associated values
@@ -78,10 +82,10 @@ for index in misclassified_indices:
 misclassified_df = pd.DataFrame(misclassified_data)
 
 # Save misclassified records to a CSV file
-# csv_output_file = r"C:\Users\ccase\Desktop\Dissertation\cross_validated_misclassified_records.csv"
-# misclassified_df.to_csv(csv_output_file, index=False)
+csv_output_file = r"C:\Users\ccase\Desktop\Dissertation\cross_validated_misclassified_records.csv"
+misclassified_df.to_csv(csv_output_file, index=False)
 
-# Find correctly classified indices
+# Find correctly classified record indices
 correctly_classified_indices = np.where(y_test == y_pred_svm)[0]
 
 # Collect correctly classified records and their associated values
@@ -101,11 +105,12 @@ for index in correctly_classified_indices:
 correctly_classified_df = pd.DataFrame(correctly_classified_data)
 
 # Save records to a CSV file
-# csv_output_file = r"C:\Users\ccase\Desktop\Dissertation\cross_validated_correctly_classified_records.csv"
-# correctly_classified_df.to_csv(csv_output_file, index=False)
+csv_output_file = r"C:\Users\ccase\Desktop\Dissertation\cross_validated_correctly_classified_records.csv"
+correctly_classified_df.to_csv(csv_output_file, index=False)
 
 print(f'Model Test Data Predictions Complete @ {datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S")}')
 
+# Model Predictive Performance Metrics
 svm_accuracy = accuracy_score(y_test, y_pred_svm)
 svm_precision = precision_score(y_test, y_pred_svm)
 svm_recall = recall_score(y_test, y_pred_svm)
@@ -118,13 +123,11 @@ print(f"SVM Recall: {svm_recall:.3f}")
 print(f"SVM F1-score: {svm_f1:.3f}")
 print(f"SVM AUC-ROC: {svm_roc_auc:.3f}")
 
-# model_path = r'./Models/LinearSVC_CV.pickle'
-#
-# with open(model_path, 'wb') as file:
-#     pickle.dump(svm_model, file)
+# Save trained model for future deployment
+model_path = r'./Models/LinearSVC_CV.pickle'
 
-num_weights_for_input_feats = np.count_nonzero(svm_model.coef_)
-print("Weights assigned to each feature in the input data:", num_weights_for_input_feats)
+with open(model_path, 'wb') as file:
+    pickle.dump(svm_model, file)
 
 # SVM Confusion Matrix
 cm_svm = confusion_matrix(y_test, y_pred_svm)
