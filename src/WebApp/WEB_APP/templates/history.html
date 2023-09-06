@@ -54,9 +54,9 @@
                     {% if record[6] == 0 and record[7] > 0.5534 %}
                     <td>Human-Written</td>
                     {% elif record[6] == 0 and record[7] < 0.5534 %} <td>Not Classifiable</td>
-                        {% elif record[6] == 1 and record[7] > 0.5534 %}
+                        {% elif record[6] == 1 and record[8] > 0.5534 %}
                         <td>AI-Generated</td>
-                        {% elif record[6] == 1 and record[7] < 0.5534 %} <td>Not Classifiable</td>
+                        {% elif record[6] == 1 and record[8] < 0.5534 %} <td>Not Classifiable</td>
                             {% else %}
                             <td>Not Classified</td>
                             {% endif %}

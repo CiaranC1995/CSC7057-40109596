@@ -40,7 +40,7 @@
                 format recognised by the model.</h1>
         </div>
 
-        {% elif classification_result.classifier_output == 1 and classification_result.human_probability >
+        {% elif classification_result.classifier_output == 1 and classification_result.ai_probability >
         0.5534 %} <div class="resultsContainer">
 
             <div class="container resultMixed">
@@ -64,7 +64,7 @@
 
         </div>
 
-        {% elif classification_result.classifier_output == 1 and classification_result.human_probability < 0.5534 %}
+        {% elif classification_result.classifier_output == 1 and classification_result.ai_probability < 0.5534 %}
             <div class="resultsContainer">
 
             <div class="container resultMixed">
@@ -129,7 +129,7 @@
                     </thead>
                     <tbody>
                         {% for sentence, perplexity in sentences_perplexities %}
-                        <tr {% if perplexity < 25 %} class="highlight" {% endif %}>
+                        <tr>
                             <td>{{ sentence }}</td>
                             <td>{{ "%.3f" % perplexity }}</td>
                         </tr>

@@ -42,10 +42,10 @@
                     specificHistoryInfo['classifier_output'][0][7] < 0.5534 %} <td>Not Classifiable
                         </td>
                         {% elif specificHistoryInfo['classifier_output'][0][6] == 1 and
-                        specificHistoryInfo['classifier_output'][0][7] > 0.5534 %}
+                        specificHistoryInfo['classifier_output'][0][8] > 0.5534 %}
                         <td>AI-Generated</td>
                         {% elif specificHistoryInfo['classifier_output'][0][6] == 1 and
-                        specificHistoryInfo['classifier_output'][0][7] < 0.5534 %} <td>Not Classifiable</td>
+                        specificHistoryInfo['classifier_output'][0][8] < 0.5534 %} <td>Not Classifiable</td>
                             {% else %}
                             <td>Not Classified</td>
                             {% endif %}
@@ -76,7 +76,7 @@
             </thead>
             <tbody>
                 {% for item in specificHistoryInfo['sentence_perplexity'] %}
-                <tr {% if item[3] < 25 %} class="highlight" {% endif %}>
+                <tr>
                     <td>{{ item[1] }}</td>
                     <td>{{ item[2] }}</td>
                     <td>{{ "%.3f" % item[3] }}</td>
